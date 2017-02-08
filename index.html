@@ -12,6 +12,16 @@
 <script type="text/javascript" src="public/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
 <script src="public/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>
+
 <style>
 body {
 	font: 400 15px Lato, sans-serif;
@@ -62,10 +72,15 @@ h4 {
 	color: #fff ;
 }
 
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+   
+}
 
-
-
-
+.navbar-hover .navbar-nav>li>a {
+    color: #fff;
+   
+}
 
 ul.dropdown-lr {
 	width: 300px;
@@ -97,6 +112,16 @@ a.forgot-password {
 	background-color: #f6f6f6;
 }
 
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
 
 </style>
 </head>
@@ -119,7 +144,50 @@ a.forgot-password {
             
 				<ul class="nav navbar-nav navbar-right">
 
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					
+
+
+
+					<li class="dropdown">
+					<a href="" class="dropdown-toggle" data-toggle="dropdown">SIGN UP<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+							
+							<li><a class="" href="#">As Student</a></li>
+							<li class="dropdown-submenu">
+                              <a class="test" tabindex="-1" href="#">As Teacher <span class="caret"></span></a>
+                               <ul class="dropdown-menu dropdown-lr animated fadeIn" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>Register</b></h3></div>
+								<form id="ajax-register-form" action="http://phpoll.com/register/process" method="post" role="form" autocomplete="off">
+									<div class="form-group">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+									</div>
+									<div class="form-group">
+										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-6 col-xs-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Register Now">
+											</div>
+										</div>
+									</div>
+                                    <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
+								</form>
+                            </div>
+                        </ul>
+							</li>
+							</ul>
+							</li>
+							
+						
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">LOGIN <span class="caret"></span></a>
 						<ul class="dropdown-menu dropdown-lr animated slideInRight"
 							role="menu">
@@ -128,6 +196,9 @@ a.forgot-password {
 									<h3>
 										<b>Log In</b>
 									</h3>
+								</div>
+								<div class="text-center">
+									
 								</div>
 								<form id="" action="" method="post" role="form"
 									autocomplete="off">
@@ -164,7 +235,7 @@ a.forgot-password {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="" tabindex="5" class="forgot-password">Forgot
+													<a href="" tabindex="5" data-toggle="modal" data-target="#myModal">Forgot
 														Password?</a>
 												</div>
 											</div>
@@ -172,90 +243,46 @@ a.forgot-password {
 									</div>
 
 								</form>
+								
+								
 							</div>
 						</ul>
 						</li>
+	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+<form action="sendmail.php" method="post" name="reset">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reset Password</h4>
+          <p>Link will be send to your email address!!</p>
+        </div>
+      <input id="email" type="text" class="form-control" name="email" placeholder="Email" required>
+	  <input type="submit" class="form-control btn btn-success" name="reset" value="Submit">
+    
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      </form>
+	  </div>
+	  </div>
+						
+						
+						
+						
 
-
-<li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Register <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Register</b></h3></div>
-								<form id="ajax-register-form" action="http://phpoll.com/register/process" method="post" role="form" autocomplete="off">
-									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-									</div>
-									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-									</div>
-									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-xs-6 col-xs-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Register Now">
-											</div>
-										</div>
-									</div>
-                                    <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
-								</form>
-                            </div>
-                        </ul>
-                    </li>
-
-
-
-					<li class="dropdown"><a href="" class="dropdown-toggle"
-						data-toggle="dropdown">SIGN UP<span class="caret"></span></a>
-						<div class="dropdown-menu">
-						<ul>	
-							<li><a href="#">As Student</a></li>
-							
-							<li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Register <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Register</b></h3></div>
-								<form id="ajax-register-form" action="http://phpoll.com/register/process" method="post" role="form" autocomplete="off">
-									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-									</div>
-									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-									</div>
-									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-xs-6 col-xs-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Register Now">
-											</div>
-										</div>
-									</div>
-                                    <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
-								</form>
-                            </div>
-                        </ul>
-                    </li>
-							
-						</ul>
-							
-						</div>
-					</li>
-
+			
+			
+						
+						
 				</ul>
+							
+			</div>
 
 			</div>
-		</div>
+		
 	</nav>
 
 	<div class="bg-image"></div>
