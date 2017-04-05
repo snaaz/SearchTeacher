@@ -1,3 +1,101 @@
+
+body {
+	font: 400 15px Lato, sans-serif;
+	line-height: 1.8;
+	color: #818181;
+}
+
+h2 {
+	font-size: 24px;
+	text-transform: uppercase;
+	color: #303030;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+h4 {
+	font-size: 19px;
+	line-height: 1.375em;
+	color: #303030;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+
+.jumbotron {
+	background-color: none;
+	color: #f4511e;
+	font-family: Montserrat, sans-serif;
+}
+
+.bg-image {
+	background-image: url("photos/books.jpg");
+	padding: 150px 25px;
+}
+
+
+
+ .navbar .navbar-brand {
+	color: #fff ;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+   
+}
+
+.navbar-hover .navbar-nav>li>a {
+    color: #fff;
+   
+}
+
+ul.dropdown-lr {
+	width: 300px;
+}
+
+a.forgot-password {
+	
+}
+
+.btn-danger {
+	font-size: 19px;
+	
+}
+.btn{
+background-color: #F4511E;
+color:white;
+}
+
+
+.container-fluid {
+	padding: 60px 50px;
+}
+
+.logo-small {
+	color: #f4511e;
+	font-size: 50px;
+}
+
+.logo {
+	color: #f4511e;
+	font-size: 200px;
+}
+
+.bg-grey {
+	background-color: #f6f6f6;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+
+
 .navbar {
 	margin-bottom: 0;
 	background-color: #f4511e;
@@ -27,3 +125,8 @@
       background-color: #fff !important;
       color: #f4511e;
   }
+   .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
