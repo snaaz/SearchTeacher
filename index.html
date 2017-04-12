@@ -2,51 +2,32 @@
 <html>
 <head>
 <title>Search Teacher Details</title>
-<link rel="stylesheet" href="public/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="public/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link href="public/animate/animate.css" rel="stylesheet">
-<link href="public/googleapis/fonts.css" rel="stylesheet" type="text/css">
-<link href="public/googleapis/fonts.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="public/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+<link href="public/googleapis/fonts.css" rel="stylesheet"
+	type="text/css">
+<link href="public/googleapis/fonts.css" rel="stylesheet"
+	type="text/css">
+<script type="text/javascript"
+	src="public/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
 <script src="public/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<link href="public/style/application.css" rel="stylesheet" type="text/css">
+<link href="public/style/application.css" rel="stylesheet"
+	type="text/css">
 <script src="public/style/application.js" type="text/javascript"></script>
 <script src="public/googleapis/jquery.min.js"></script>
-
-
-<style>
-.bg-image {
-	background-image: url("public/photos/books.jpg");
-	padding: 150px 25px;
-}
-
-</style>
-
-<script>
-
-$(document).ready(function(){
-
-	$('#confirm_password').on('keyup', function () {
-	    if ($('#password').val() == $('#confirm_password').val()) {
-	    	 $('#message').html('perfect').css('color', 'green');
-	    } else 
-	        $('#message').html('confirm password must be same').css('color', 'red');
-	});
-
-
-	
-});
-</script>
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar"
 	data-offset="60">
-	
+
 	<?php include 'controller/signup.php';?>
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				
+
 				<a class="navbar-brand" href="#myPage">Home</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
@@ -56,11 +37,11 @@ $(document).ready(function(){
 					<li><a href="#services">SERVICES</a></li>
 					<li><a href="#contact">CONTACT</a></li>
 				</ul>
-            
+
 				<ul class="nav navbar-nav navbar-right">
 
 
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">SIGN UP <span class="caret"></span></a>
 						<ul class="dropdown-menu dropdown-lr animated slideInRight"
 							role="menu">
@@ -70,11 +51,9 @@ $(document).ready(function(){
 										<b>Sign Up</b>
 									</h3>
 								</div>
-								<div class="text-center">
-									
-								</div>
-								<form id="" action="controller/signup.php" method="post" role="form"
-									autocomplete="off">
+								<div class="text-center"></div>
+								<form id="" action="controller/signup.php" method="post"
+									role="form" autocomplete="off">
 									<div class="form-group">
 
 										<input type="email" name="email" id="email" tabindex="1"
@@ -82,60 +61,63 @@ $(document).ready(function(){
 											autocomplete="off" required>
 									</div>
 
-                                   <div class="form-group">
+									<div class="form-group">
 
 										<input type="text" name="mobile" id="mobile" tabindex="1"
 											class="form-control" placeholder="Mobile" value=""
-											autocomplete="off" required> 
+											pattern='^\d{10}$' autocomplete="off" required>
 									</div>
+
+
+
+
 									<div class="form-group">
 
 										<input type="password" name="password" id="password"
 											tabindex="2" class="form-control" placeholder="Password"
+											pattern=".{6,}" required title="6 characters minimum"
 											autocomplete="off" required>
 									</div>
-									
-															
+
+
 									<div class="form-group">
 
-										<input type="password" name="confirm_password" id="confirm_password" tabindex="1"
-											class="form-control" placeholder="Confirm Password" value=""
-											autocomplete="off" required>
-											<span id="message"></span>
+										<input type="password" name="confirm_password"
+											id="confirm_password" tabindex="1" class="form-control"
+											placeholder="Confirm Password" value="" autocomplete="off"
+											required> <span id="message"></span>
 									</div>
 
 									<div class="form-group">
 										<div class="row">
 											<div class="col-xs-9">
 												<input type="radio" tabindex="3" name="select"
-													id="teacher"> <label for="teacher" >
+													value="teacher" id="teacher"> <label for="teacher">
 													Teacher</label>
 											</div>
-											
+
 											<div class="col-xs-9">
 												<input type="radio" tabindex="3" name="select"
-													id="student"> <label for="student">
+													value="student" id="student"> <label for="student">
 													Student</label>
 											</div>
-											
+
 											<div class="col-xs-5 pull-right">
-												<input type="submit" name="submit" id=""
-													tabindex="4" class="form-control btn btn-success"
-													value="Register">
+												<input type="submit" name="submit" id="" tabindex="4"
+													class="form-control btn btn-success" value="Register">
 											</div>
 										</div>
 									</div>
 
 								</form>
-								
-								
+
+
 							</div>
-						</ul>
-						</li>								
-						
-							
-						
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
+						</ul></li>
+
+
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">LOGIN <span class="caret"></span></a>
 						<ul class="dropdown-menu dropdown-lr animated slideInRight"
 							role="menu">
@@ -145,14 +127,12 @@ $(document).ready(function(){
 										<b>Log In</b>
 									</h3>
 								</div>
-								<div class="text-center">
-									
-								</div>
-								<form id="" action="" method="post" role="form"
-									autocomplete="off">
+								<div class="text-center"></div>
+								<form id="" action="controller/login.php" method="post"
+									role="form" autocomplete="off">
 									<div class="form-group">
 
-										<input type="text" name="email" id="email" tabindex="1"
+										<input type="email" name="email" id="email" tabindex="1"
 											class="form-control" placeholder="Email" value=""
 											autocomplete="off">
 									</div>
@@ -161,6 +141,7 @@ $(document).ready(function(){
 
 										<input type="password" name="password" id="password"
 											tabindex="2" class="form-control" placeholder="Password"
+											pattern=".{6,}" required title="6 characters minimum"
 											autocomplete="off">
 									</div>
 
@@ -183,33 +164,37 @@ $(document).ready(function(){
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="" tabindex="5">Forgot
-														Password?</a>
+													<a href="" tabindex="5">Forgot Password?</a>
 												</div>
 											</div>
 										</div>
 									</div>
 
 								</form>
-								
-								
+
+
 							</div>
-						</ul>
-						</li>
+						</ul></li>
 
-												
+
 				</ul>
-							
-			</div>
 
 			</div>
-		
+
+		</div>
+
 	</nav>
 
 	<div class="bg-image"></div>
-
 	<div class="jumbotron text-center">
-
+		<?php 
+	//session_start();
+    if(isset($_SESSION["message"]))
+	{
+	echo $_SESSION["message"];
+	unset($_SESSION["message"]);
+	}	
+?>
 		<h1>Find Your Teacher</h1>
 		<p>We specialize in teaching</p>
 		<form>

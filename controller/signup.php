@@ -2,7 +2,6 @@
 include ('connection.php');
 session_start ();
 
-
 if (isset ( $_POST ['submit'] )) {
 	$email = $_POST ['email'];
 	$password = $_POST ['password'];
@@ -14,23 +13,41 @@ if (isset ( $_POST ['submit'] )) {
 	$salt = sprintf ( "$2a$%02d$", $cost ) . $salt;
 	$hash = crypt ( $password, $salt );
 	
-	$insert = "INSERT INTO users(email,password,mobile,usertype)
-        values('$email','$hash','$mobile')";
+	$users = mysqli_query ( $connection, "select * from users where email='$email' or mobile='$mobile' " );
+	$user = mysqli_fetch_array ( $users );
+	$email_new = explode ( "@", $email );
+	$username = $email_new [0];
+	$_SESSION ["username"] = $username;
 	
-	if ($connection->query ( $insert ) === TRUE) {
-		echo "Sign up successfully please login";
+	$rows=mysqli_num_rows($users);
+
+
 		
-		$_SESSION ["message"] = "Sign up successfully please login";
-		
-		
-			header ( 'Location:../index.html' );
-		
-	} 
-	else {
-		echo "Error: " . $sql . "<br>" . $connection->error;
-		$_SESSION ['error'] = "Error: " . $sql . "<br>" . $connection->error;
+	if ($rows> 0) {
+		echo "Email/mobile already exist..";
+		$_SESSION ["message"] = "Can't Sign Up Email/mobile already exist..";
 		header ( 'Location: ../index.html' );
+	
+	
 	}
+		else{
+			
+		
+		$insert = "INSERT INTO users(email,password,mobile,usertype)
+        values('$email','$hash','$mobile','$usertype')";
+		
+		if ($connection->query ( $insert ) === TRUE) {
+			echo "Sign up successfully please login";
+			
+			header ( 'Location:../views/dashboard.html' );
+		} else {
+			echo "Error: " . $sql . "<br>" . $connection->error;
+			$_SESSION ['error'] = "Error: " . $sql . "<br>" . $connection->error;
+			header ( 'Location: ../index.html' );
+		}
+		}
+
 }
+
 $connection->close ();
 ?>
