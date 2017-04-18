@@ -9,4 +9,7 @@ if ($connection->connect_error) {
 	die ( "connection failed" . $connection->connect_error );
 }
 
+//$uresr=mysqli_query($connection,"select * FROM `users` WHERE 1");
+
+
 ?>

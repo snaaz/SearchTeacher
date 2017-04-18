@@ -3,17 +3,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>welcome to dashboard</title>
-<?php 'include style&js_links.html'?>
+<?php include 'style&js_links.html'?>
+
 </head>
 <body>
 
-	<?php include 'header.html';
+	<?php 
+include 'header.html';
+include '../controller/connection.php';
 session_start();
-if(isset($_SESSION["message"]))
-	{
-	echo $_SESSION["message"];
-	unset($_SESSION["message"]);
-	}	
+if($_SESSION["username"]){
+
+
+	if(isset($_SESSION["message"]))
+		{
+			echo $_SESSION["message"];
+			unset($_SESSION["message"]);
+		}	
 ?>
 
 	<div class="container-fluid">
@@ -21,120 +27,244 @@ if(isset($_SESSION["message"]))
 			<div class="col-sm-2 sidenav">
 				<?php include 'lside.html'; ?>
 			</div>
-			
+
 			<div class="col-sm-8">
-  
-  <h1 class="text-center">USER PROFILE</h1>
-    <hr>
-			<div class="col-sm-8 text-left">
-			
-				
-				
-				
-				<form method="post" action="update_profile.php" name="form"
-		onsubmit="return Checkfiles();" enctype="multipart/form-data"
-		class="form-horizontal">
 
-		<div class="form-group">
-			<label class="col-sm-4" for="fname">Name:</label> 
-			<div class="col-sm-5">
-			<input
-				type="text" class="form-control" name="name"
-				value="<?php echo $_SESSION['user']['name'];?>" required>
-           </div>
-		</div>
+				<h1 class="text-center">USER PROFILE</h1>
+				<hr>
+				<div class="col-sm-12 text-left">
 
-       
-		<div class="form-group">
-			<label class="col-sm-4 text-left" for="email">Email:</label>
-			<div class="col-sm-5">
-			 <input
-				type="email" class="form-control" name="email"
-				value="<?php echo $_SESSION['user']['email'];?>" required>
-		</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-4" for="mobile">Mobile:</label>
-			<div class="col-sm-5">
-			 <input type="text"
-				class="form-control" name="mobile"
-				value="<?php echo $_SESSION['user']['mobile'];?>" required>
-		</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-4" for="address">Address:</label> 
-			<div class="col-sm-5">
-			<input
-				type="text" class="form-control" name="address"
-				value="<?php echo $_SESSION['user']['address'];?>" required>
-		</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-4 text-left" for="city">City:</label> 
-			<div class="col-sm-5">
-			<input
-				type="text" class="form-control" name="city"
-				value="<?php echo $_SESSION['user']['city'];?>" required>
-		</div>
-        </div>
-		<input type="hidden" name="id"
-			value="<?php echo $_SESSION['user']['id'];?>">
 
-<div class="form-group">
-			
-			<label class="col-sm-4" for="state">State:</label>
-			<div class="col-sm-5">
-			
-			<select name="state"  class="form-control" >
-<?php while($state=mysqli_fetch_array($states)){ ?>
-   <?php if($state['name'] == $_SESSION['user']['state']){ ?>
-    <option class="form-control"
-						value="<?php echo $_SESSION['user']['state'];?>"
-						selected="selected"><?php echo $_SESSION['user']['state'];?>
-					</option>   
-      <?php } else { ?>
+					<form method="post" action="update_profile.php" name="form"
+						onsubmit="return Checkfiles();" enctype="multipart/form-data"
+						class="form-horizontal">
 
-  <option value="<?php echo $state['name'];?>" class="form-control"><?php echo $state['name'];?> </option>
- <?php }
+
+
+
+
+						<?php
+	$users=mysqli_query($connection,"select * FROM `users` WHERE id='".$_SESSION['id']."' ");
+	while($row=mysqli_fetch_array($users)){  
+
+                    ?>
+
+
+						<div class="form-group">
+							<label class="col-sm-3" for="fname">Name:</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="name"
+									value="<?php echo $row['name'];?>">
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+							<label class="col-sm-3" for="email">Email:</label>
+							<div class="col-sm-3">
+								<input type="email" class="form-control" name="email"
+									value="<?php echo $row['email'];?>" >
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3" for="mobile">Mobile:</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="mobile"
+									value="<?php echo $row['mobile'];?>">
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3" for="dob">dob:</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" name="dob"
+									value="<?php echo $row['dob'];?>" >
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1" for="address">Address</label>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1" for="state">State</label>
+							<div class="col-sm-3">
+
+								<select name="state" class="form-control">
+									<?php $states=mysqli_query($connection,"select * from states");
+while($state=mysqli_fetch_array($states)){ ?>
+									<?php if($state['sname'] == $row['state']){ ?>
+									<option class="form-control"
+										value="<?php echo $row['state'];?>" selected="selected"><?php echo $row['state'];?>
+									</option>
+									<?php } else { ?>
+
+									<option value="<?php echo $state['sname'];?>"
+										class="form-control"><?php echo $state['sname'];?>
+									</option>
+									<?php }
 } ?>
-</select>
-			</div>
+								</select>
 
-		</div>
-		<div class="form-group">
-		
-		<label class="col-sm-4" for="img">Profile Img:</label> 
-			<input type="file" id="filename" name="file" accept="image/*"
-				onchange="Checkfiles()">
-		<?php 
-	$id=$_SESSION['user']['id'];
- while($row = mysqli_fetch_array($result_set))
- {
-  ?>		
-			<image src="uploads/<?php echo $row['file']?>" width="100" height="150"></image>
-			
- <?php } ?>
-		</div>
+							</div>
 
-			<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<input type="submit" name="update" value="update" class="btn btn-info btn-sm" onclick="return alertbox();" >
-			</div>
-		</div>
-		
-		<?
-		 if(isset($_SESSION["error"]))
-	{
-	echo $_SESSION["error"];
-	unset($_SESSION["error"]);
-	}
-		?>
-		
-	</form>
-				
-					
+
+							<label class="col-sm-1" for="district">District</label>
+							<div class="col-sm-3">
+
+								<select name="district" class="form-control">
+									<?php $districts=mysqli_query($connection,"select * from district");
+while($district=mysqli_fetch_array($districts)){ ?>
+									<?php if($district['dname'] == $row['district']){ ?>
+									<option class="form-control"
+										value="<?php echo $row['district'];?>" selected="selected"><?php echo $row['district'];?>
+									</option>
+									<?php } else { ?>
+
+									<option value="<?php echo $district['dname'];?>"
+										class="form-control"><?php echo $district['dname'];?>
+									</option>
+									<?php }
+} ?>
+								</select>
+							</div>
+
+
+						</div>
+
+						<div class="form-group">
+
+							<label class="col-sm-1" for="city">City:</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="city"
+									value="<?php echo $row['city'];?>" >
+							</div>
+							<label class="col-sm-1" for="locality">Locality:</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="locality"
+									value="<?php echo $row['locality'];?>" >
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1" for="pincode">Pincode:</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="pincode"
+									value="<?php echo $row['pincode'];?>" >
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3" for="qualification">Qualification</label>
+							<div class="col-sm-3">
+								<select name="qualification" class="form-control">
+									<option class="form-control" value="post graduate">Post
+										Graduate</option>
+									<option class="form-control" value="graduate">Graduate</option>
+									<option class="form-control" value="class 12">Class 12</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3" for="year-of-passing">Year of
+								Passing</label>
+							<div class="col-sm-3">
+								<select id="year-of-passing"></select>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3" for="university">Univesity/Collage:</label>
+							
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="university"
+									value="<?php echo $row['university'];?>">
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3" for="subject">Subject To Teach:</label>
+							<div class="col-sm-3">
+								<select name="subject" class="form-control">
+									<?php $user_subjects = mysqli_query($connection,"select * from user_subjects where id = '".$_SESSION['id']."'");
+										$row1 = mysqli_fetch_array($user_subjects);
+									
+$subjects = mysqli_query($connection,"select * from subjects");
+									
+while($subject=mysqli_fetch_array($subjects)){ ?>
+									<?php if($subject['subject_name'] == $row1['subject_name']){ ?>
+									<option class="form-control"
+										value="<?php echo $subject['subject_name'];?>"
+										selected="selected"><?php echo $row1['subject_name'];?>
+									</option>
+									<?php } else { ?>
+
+									<option value="<?php echo $subject['subject_name'];?>"
+										class="form-control"><?php echo $subject['subject_name'];?>
+									</option>
+									<?php }
+} ?>
+								</select>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3" for="class">Class To Teach:</label>
+							<div class="col-sm-3">
+								<select name="class" class="form-control">
+									<?php $class=mysqli_query($connection,"select * from class");
+while($class=mysqli_fetch_array($class)){ ?>
+									<?php if($class['class'] == $row['class']){ ?>
+									<option class="form-control"
+										value="<?php echo $row['class'];?>" selected="selected"><?php echo $row['class'];?>
+									</option>
+									<?php } else { ?>
+
+									<option value="<?php echo $class['class'];?>"
+										class="form-control"><?php echo $class['class'];?>
+									</option>
+									<?php }
+} ?>
+								</select>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+
+							<div class="col-sm-3">
+								<input type="checkbox" class="" name="tuition-type" value="home">Home
+								tutor
+							</div>
+
+							<div class="col-sm-3">
+								<input type="checkbox" class="" name="tuition-type"
+									value="coaching">Coaching Tutor
+							</div>
+						</div>
 						
+						<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" name="update" value="Update" class="btn btn-info btn-sm" onclick="return alertbox();" >
 			</div>
+		</div>
+
+						<?php } ?>
+
+
+					</form>
+
+
+
+				</div>
 			</div>
 			<div class="col-sm-2 sidenav">
 				<?php include 'rside.html'?>
@@ -144,8 +274,13 @@ if(isset($_SESSION["message"]))
 
 	</div>
 
-	
-		<?php include 'footer.html';?>
-	
+
+	<?php include 'footer.html';
+		}
+         else{
+        header("location:../index.html");
+           }
+		?>
+
 </body>
 </html>

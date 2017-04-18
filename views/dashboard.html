@@ -7,8 +7,11 @@
 </head>
 <body>
 
-	<?php include 'header.html';
-session_start();
+
+	<?php 
+	session_start();
+if($_SESSION ["username"]){
+include 'header.html';
 if(isset($_SESSION["message"]))
 	{
 	echo $_SESSION["message"];
@@ -21,7 +24,7 @@ if(isset($_SESSION["message"]))
 			<div class="col-sm-2 sidenav">
 				<?php include 'lside.html'; ?>
 			</div>
-			<div class="col-sm-8 text-left id="load">
+			<div class="col-sm-8 text-left">
 				<?php include 'middle.html';?>
 			</div>
 			<div class="col-sm-2 sidenav">
@@ -32,8 +35,13 @@ if(isset($_SESSION["message"]))
 
 	</div>
 
-	
-		<?php include 'footer.html';?>
-	
+
+	<?php include 'footer.html';
+		}else{
+    header("location:../index.html");
+		}
+		?>
+
+
 </body>
 </html>
