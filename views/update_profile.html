@@ -3,16 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>welcome to dashboard</title>
-<?php include 'style&js_links.html'?>
 
 </head>
 <body>
 
 	<?php 
 include 'header.html';
-include '../controller/connection.php';
-session_start();
-if($_SESSION["username"]){
+include '../controller/update_profile.php';
 
 
 	if(isset($_SESSION["message"]))
@@ -35,19 +32,13 @@ if($_SESSION["username"]){
 				<div class="col-sm-12 text-left">
 
 
-					<form method="post" action="update_profile.php" name="form"
-						onsubmit="return Checkfiles();" enctype="multipart/form-data"
+					<form method="post" action="../controller/update_profile.php"
+						name="form" onsubmit="" enctype="multipart/form-data"
 						class="form-horizontal">
 
-
-
-
-
 						<?php
-	$users=mysqli_query($connection,"select * FROM `users` WHERE id='".$_SESSION['id']."' ");
-	while($row=mysqli_fetch_array($users)){  
-
-                    ?>
+	$row=mysqli_fetch_array($users) 
+   ?>
 
 
 						<div class="form-group">
@@ -60,11 +51,12 @@ if($_SESSION["username"]){
 
 
 
+
 						<div class="form-group">
 							<label class="col-sm-3" for="email">Email:</label>
 							<div class="col-sm-3">
 								<input type="email" class="form-control" name="email"
-									value="<?php echo $row['email'];?>" >
+									value="<?php echo $row['email'];?>" required>
 							</div>
 						</div>
 
@@ -73,7 +65,7 @@ if($_SESSION["username"]){
 							<label class="col-sm-3" for="mobile">Mobile:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="mobile"
-									value="<?php echo $row['mobile'];?>">
+									value="<?php echo $row['mobile'];?>" required>
 							</div>
 						</div>
 
@@ -82,7 +74,7 @@ if($_SESSION["username"]){
 							<label class="col-sm-3" for="dob">dob:</label>
 							<div class="col-sm-3">
 								<input type="date" class="form-control" name="dob"
-									value="<?php echo $row['dob'];?>" >
+									value="<?php echo $row['dob'];?>">
 							</div>
 						</div>
 
@@ -95,7 +87,7 @@ if($_SESSION["username"]){
 							<div class="col-sm-3">
 
 								<select name="state" class="form-control">
-									<?php $states=mysqli_query($connection,"select * from states");
+									<?php 
 while($state=mysqli_fetch_array($states)){ ?>
 									<?php if($state['sname'] == $row['state']){ ?>
 									<option class="form-control"
@@ -117,7 +109,7 @@ while($state=mysqli_fetch_array($states)){ ?>
 							<div class="col-sm-3">
 
 								<select name="district" class="form-control">
-									<?php $districts=mysqli_query($connection,"select * from district");
+									<?php
 while($district=mysqli_fetch_array($districts)){ ?>
 									<?php if($district['dname'] == $row['district']){ ?>
 									<option class="form-control"
@@ -141,12 +133,12 @@ while($district=mysqli_fetch_array($districts)){ ?>
 							<label class="col-sm-1" for="city">City:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="city"
-									value="<?php echo $row['city'];?>" >
+									value="<?php echo $row['city'];?>">
 							</div>
 							<label class="col-sm-1" for="locality">Locality:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="locality"
-									value="<?php echo $row['locality'];?>" >
+									value="<?php echo $row['locality'];?>">
 							</div>
 
 						</div>
@@ -155,7 +147,7 @@ while($district=mysqli_fetch_array($districts)){ ?>
 							<label class="col-sm-1" for="pincode">Pincode:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="pincode"
-									value="<?php echo $row['pincode'];?>" >
+									value="<?php echo $row['pincode'];?>">
 							</div>
 						</div>
 
@@ -163,10 +155,22 @@ while($district=mysqli_fetch_array($districts)){ ?>
 							<label class="col-sm-3" for="qualification">Qualification</label>
 							<div class="col-sm-3">
 								<select name="qualification" class="form-control">
+							
+
 									<option class="form-control" value="post graduate">Post
 										Graduate</option>
 									<option class="form-control" value="graduate">Graduate</option>
 									<option class="form-control" value="class 12">Class 12</option>
+
+									
+									<option class="form-control"
+										value="<?php echo $row['qualification'];?>"
+										selected="selected"><?php echo $row['qualification'];?>
+									</option>
+
+
+							
+
 								</select>
 							</div>
 						</div>
@@ -174,14 +178,20 @@ while($district=mysqli_fetch_array($districts)){ ?>
 							<label class="col-sm-3" for="year-of-passing">Year of
 								Passing</label>
 							<div class="col-sm-3">
-								<select id="year-of-passing"></select>
-
+								<select id="year-of-passing" name="year-of-passing">
+                                   <option class="form-control"
+										value="<?php echo $row['yearofpassing'];?>"
+										selected="selected"><?php echo $row['yearofpassing'];?>
+									</option>
+									</select>
 							</div>
+
+
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-3" for="university">Univesity/Collage:</label>
-							
+
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="university"
 									value="<?php echo $row['university'];?>">
@@ -193,10 +203,7 @@ while($district=mysqli_fetch_array($districts)){ ?>
 							<label class="col-sm-3" for="subject">Subject To Teach:</label>
 							<div class="col-sm-3">
 								<select name="subject" class="form-control">
-									<?php $user_subjects = mysqli_query($connection,"select * from user_subjects where id = '".$_SESSION['id']."'");
-										$row1 = mysqli_fetch_array($user_subjects);
-									
-$subjects = mysqli_query($connection,"select * from subjects");
+									<?php $row1 = mysqli_fetch_array($user_subjects);
 									
 while($subject=mysqli_fetch_array($subjects)){ ?>
 									<?php if($subject['subject_name'] == $row1['subject_name']){ ?>
@@ -220,67 +227,64 @@ while($subject=mysqli_fetch_array($subjects)){ ?>
 							<label class="col-sm-3" for="class">Class To Teach:</label>
 							<div class="col-sm-3">
 								<select name="class" class="form-control">
-									<?php $class=mysqli_query($connection,"select * from class");
-while($class=mysqli_fetch_array($class)){ ?>
-									<?php if($class['class'] == $row['class']){ ?>
-									<option class="form-control"
+									<?php 
+while($class1=mysqli_fetch_array($class)){ ?>
+
+<?php if($class1['class']==$row['class']){ ?>
+                    <option class="form-control"
 										value="<?php echo $row['class'];?>" selected="selected"><?php echo $row['class'];?>
 									</option>
 									<?php } else { ?>
 
-									<option value="<?php echo $class['class'];?>"
-										class="form-control"><?php echo $class['class'];?>
+									<option class="form-control" value="<?php echo $class1['class']?>"><?php echo $class1['class'];?>
 									</option>
-									<?php }
-} ?>
+<?php }  } ?>
+								
 								</select>
 
 							</div>
 						</div>
-
-						<div class="form-group">
-
-							<div class="col-sm-3">
-								<input type="checkbox" class="" name="tuition-type" value="home">Home
-								tutor
-							</div>
-
-							<div class="col-sm-3">
-								<input type="checkbox" class="" name="tuition-type"
-									value="coaching">Coaching Tutor
-							</div>
-						</div>
 						
 						<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<input type="submit" name="update" value="Update" class="btn btn-info btn-sm" onclick="return alertbox();" >
-			</div>
+			<label class="col-sm-3" for="img">Profile Img:</label> 
+			<input
+				type="file" id="filename" name="file" accept="image/*"
+				onchange="Checkfiles()">
+			<?php 
+	
+  while($pic=mysqli_fetch_array($pics))
+ {
+  ?>
+			<image src="../public/photos/<?php echo $pic['profile_pic']?>" width="100" height="150"></image>
+ <?php } ?>
 		</div>
+						
 
-						<?php } ?>
+						<input type="hidden" name="id" value="<?php echo $row['id'];?>" >
 
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="submit" name="update" value="Update"
+									class="btn btn-info btn-sm" onclick="return alertbox();">
+							</div>
+						</div>
+
+			
 
 					</form>
-
-
 
 				</div>
 			</div>
 			<div class="col-sm-2 sidenav">
-				<?php include 'rside.html'?>
+				<?php include 'rside.html';?>
 			</div>
 
 		</div>
 
 	</div>
 
-
-	<?php include 'footer.html';
-		}
-         else{
-        header("location:../index.html");
-           }
-		?>
+	<?php include 'footer.html'; ?>
 
 </body>
 </html>

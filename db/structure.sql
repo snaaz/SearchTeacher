@@ -63,19 +63,21 @@ insert into district(dname,state_id) values("west Mednipur",28);
 CREATE TABLE user_subjects(
     id int(11) PRIMARY KEY AUTO_INCREMENT,
     user_id int(11) not null,
-    subject_name varchar(50));
+    subject_name varchar(50)
+    language` VARCHAR(50));
     
     CREATE TABLE subjects(
     id int(11) PRIMARY KEY AUTO_INCREMENT,
     subject_name varchar(50));
     
-    INSERT into subjects(subject_name) VALUES("Urdu");
+
 INSERT into subjects(subject_name) VALUES("English");
+INSERT into subjects(subject_name) VALUES("Bengali");
+INSERT into subjects(subject_name) VALUES("Hindi");
+INSERT into subjects(subject_name) VALUES("Urdu");
 INSERT into subjects(subject_name) VALUES("History");
 INSERT into subjects(subject_name) VALUES("Geography");
 INSERT into subjects(subject_name) VALUES("Math");
-INSERT into subjects(subject_name) VALUES("Bengali");
-INSERT into subjects(subject_name) VALUES("Hindi");
 INSERT into subjects(subject_name) VALUES("Life Science");
 INSERT into subjects(subject_name) VALUES("Physics");
 INSERT into subjects(subject_name) VALUES("Chemisty");
@@ -92,3 +94,9 @@ INSERT into class(class) VALUES("XI to XII");
 INSERT into class(class) VALUES("Graduation");
 INSERT into class(class) VALUES("Post Graduation");
     
+    
+    
+    CREATE TABLE profile_pic
+( id int PRIMARY KEY AUTO_INCREMENT,
+ profile_pic blob,
+ user_id int);

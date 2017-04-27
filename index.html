@@ -3,20 +3,20 @@
 <head>
 <title>Search Teacher Details</title>
 
-<link rel="stylesheet"
-	href="public/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link href="public/animate/animate.css" rel="stylesheet">
-<link href="public/googleapis/fonts.css" rel="stylesheet"
-	type="text/css">
-<link href="public/googleapis/fonts.css" rel="stylesheet"
-	type="text/css">
-<script type="text/javascript"
-	src="public/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-<script src="public/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<link href="public/style/application.css" rel="stylesheet"
-	type="text/css">
-<script src="public/style/application.js" type="text/javascript"></script>
-<script src="public/googleapis/jquery.min.js"></script>
+
+<link href="public/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="public/style/animate.css" rel="stylesheet">
+<link href="public/googleapis-fonts.css" rel="stylesheet" type="text/css">
+<link href="public/style/application.css" rel="stylesheet" type="text/css">
+
+
+<script src="public/javascript/jquery.min.js" type="text/javascript" ></script>
+<script src="public/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="public/javascript/application.js" type="text/javascript"></script>
+
+
+
+
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar"
@@ -129,7 +129,7 @@
 								</div>
 								<div class="text-center"></div>
 								<form id="" action="controller/login.php" method="post"
-									role="form" autocomplete="off">
+									role="form" autocomplete="on">
 									<div class="form-group">
 
 										<input type="email" name="email" id="email" tabindex="1"
@@ -201,6 +201,14 @@
 			<input type="text" class="well well-sm" size="50"
 				placeholder="Enter class/Subject/location" required>
 			<button type="button" class="btn btn-danger">Search</button>
+			
+			<div class="input-group input-group-lg" style="width:500px; align:center">
+<input type="text" name="search" class="form-control" id="" placeholder="Enter class/Subject/location" required>
+<span class="input-group-btn">
+<button type="submit" name="search" id="" class="btn btn-secondary">Search</button>
+</span>
+			</div>
+			
 		</form>
 	</div>
 

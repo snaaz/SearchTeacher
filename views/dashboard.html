@@ -12,17 +12,22 @@
 	session_start();
 if($_SESSION ["username"]){
 include 'header.html';
-if(isset($_SESSION["message"]))
-	{
-	echo $_SESSION["message"];
-	unset($_SESSION["message"]);
-	}	
+	
 ?>
 
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<?php include 'lside.html'; ?>
+			</div>
+			
+			<div class="col-sm-5 text-center" style="color:#f4511e">
+			<?php if(isset($_SESSION["message"]))
+	{
+	echo $_SESSION["message"];
+	unset($_SESSION["message"]);
+	}
+			?>
 			</div>
 			<div class="col-sm-8 text-left">
 				<?php include 'middle.html';?>
