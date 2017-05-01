@@ -6,8 +6,10 @@ $email = $_POST ['email'];
 $userpass = $_POST ['password'];
 
 $result = mysqli_query ( $connection, "select * FROM `users` WHERE email='$email' limit 1" );
-
 $row = mysqli_fetch_array ( $result );
+
+
+
 $email_new = explode ( "@", $email );
 $username = $email_new [0];
 $_SESSION ["username"] = $username;

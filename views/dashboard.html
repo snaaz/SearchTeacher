@@ -23,10 +23,10 @@ include 'header.html';
 			
 			<div class="col-sm-5 text-center" style="color:#f4511e">
 			<?php if(isset($_SESSION["message"]))
-	{
-	echo $_SESSION["message"];
-	unset($_SESSION["message"]);
-	}
+				{
+				echo $_SESSION["message"];
+				unset($_SESSION["message"]);
+				}
 			?>
 			</div>
 			<div class="col-sm-8 text-left">
@@ -43,9 +43,10 @@ include 'header.html';
 
 	<?php include 'footer.html';
 		}else{
-    header("location:../index.html");
+    header("location: ../index.html");
 		}
 		?>
+		
 
 
 </body>

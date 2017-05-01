@@ -18,34 +18,39 @@ include '../controller/update_profile.php';
 			unset($_SESSION["message"]);
 		}	
 ?>
-
+<?php  if($_SESSION ["username"]){ ?>
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<?php include 'lside.html'; ?>
 			</div>
 
-			<div class="col-sm-8">
 
-				<h1 class="text-center">USER PROFILE</h1>
+<?php
+	$row=mysqli_fetch_array($users) 
+   ?>
+			<div class="col-sm-8">
+<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
+				<h3 class="text-center">Teacher Profile</h3>
+				<?php } else { ?>
+				<h3 class="text-center">Student profile</h3>
+				<?php }?>
 				<hr>
 				<div class="col-sm-12 text-left">
 
 
 					<form method="post" action="../controller/update_profile.php"
-						name="form" onsubmit="" enctype="multipart/form-data"
+						name="form" onsubmit="validate" enctype="multipart/form-data"
 						class="form-horizontal">
 
-						<?php
-	$row=mysqli_fetch_array($users) 
-   ?>
+						
 
 
 						<div class="form-group">
 							<label class="col-sm-3" for="fname">Name:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="name"
-									value="<?php echo $row['name'];?>">
+									value="<?php echo $row['name'];?>" >
 							</div>
 						</div>
 
@@ -56,7 +61,7 @@ include '../controller/update_profile.php';
 							<label class="col-sm-3" for="email">Email:</label>
 							<div class="col-sm-3">
 								<input type="email" class="form-control" name="email"
-									value="<?php echo $row['email'];?>" required>
+									value="<?php echo $row['email'];?>"  required>
 							</div>
 						</div>
 
@@ -64,7 +69,7 @@ include '../controller/update_profile.php';
 						<div class="form-group">
 							<label class="col-sm-3" for="mobile">Mobile:</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" name="mobile"
+								<input type="text" class="form-control" name="mobile" pattern='^\d{10}$'
 									value="<?php echo $row['mobile'];?>" required>
 							</div>
 						</div>
@@ -151,22 +156,19 @@ while($district=mysqli_fetch_array($districts)){ ?>
 							</div>
 						</div>
 
+<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 						<div class="form-group">
 							<label class="col-sm-3" for="qualification">Qualification</label>
 							<div class="col-sm-3">
 								<select name="qualification" class="form-control">
 							
 
-									<option class="form-control" value="post graduate">Post
-										Graduate</option>
-									<option class="form-control" value="graduate">Graduate</option>
-									<option class="form-control" value="class 12">Class 12</option>
+									<option class="form-control" value="Post Graduate" <?php if($row['qualification']=='Post Graduate'){ echo 'selected' ;} ?> >Post Graduate</option>
+									<option class="form-control" value="Graduate" <?php if($row['qualification']=='Graduate') { echo 'selected'; } ?> >Graduate</option>
+									<option class="form-control" value="Class 12" <?php if($row['qualification']=='Class 12') { echo 'selected'; } ?> >Class 12</option>
 
 									
-									<option class="form-control"
-										value="<?php echo $row['qualification'];?>"
-										selected="selected"><?php echo $row['qualification'];?>
-									</option>
+									
 
 
 							
@@ -188,19 +190,26 @@ while($district=mysqli_fetch_array($districts)){ ?>
 
 
 						</div>
-
+<?php } ?>
 						<div class="form-group">
+						<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 							<label class="col-sm-3" for="university">Univesity/Collage:</label>
-
+							<?php } else {?>
+                       <label class="col-sm-3" for="university">Collage/School:</label>
+                       <?php } ?>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" name="university"
-									value="<?php echo $row['university'];?>">
+									value="<?php echo $row['university'];?>" >
 							</div>
 						</div>
 
 
 						<div class="form-group">
+						<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 							<label class="col-sm-3" for="subject">Subject To Teach:</label>
+							<?php } else {?>
+							<label class="col-sm-3" for="subject">Subject To Learn:</label>
+							<?php } ?>
 							<div class="col-sm-3">
 								<select name="subject" class="form-control">
 									<?php $row1 = mysqli_fetch_array($user_subjects);
@@ -224,7 +233,11 @@ while($subject=mysqli_fetch_array($subjects)){ ?>
 						</div>
 
 						<div class="form-group">
+						<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 							<label class="col-sm-3" for="class">Class To Teach:</label>
+							<?php } else {?>
+							<label class="col-sm-3" for="class">Class To Learn:</label>
+							<?php } ?>
 							<div class="col-sm-3">
 								<select name="class" class="form-control">
 									<?php 
@@ -245,8 +258,12 @@ while($class1=mysqli_fetch_array($class)){ ?>
 							</div>
 						</div>
 						
+												
+						
+						
+						
 						<div class="form-group">
-			<label class="col-sm-3" for="img">Profile Img:</label> 
+			<label class="col-sm-3" for="img">Profile Image:</label> 
 			<input
 				type="file" id="filename" name="file" accept="image/*"
 				onchange="Checkfiles()">
@@ -283,6 +300,12 @@ while($class1=mysqli_fetch_array($class)){ ?>
 		</div>
 
 	</div>
+	<?php } 
+   else
+    {
+    header("location:../index.html");
+    }
+	?>
 
 	<?php include 'footer.html'; ?>
 

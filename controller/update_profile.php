@@ -35,6 +35,20 @@ if (isset ( $_POST ['update'] )) {
 	$class = $_POST ['class'];
 	$id = $_POST ['id'];
 	
+	
+	
+	$users = mysqli_query ( $connection, "select * from users where id != '$id' and (email='$email' or mobile='$mobile')   " );
+	$rows=mysqli_num_rows($users);
+	
+	if ($rows> 0) {
+		echo "Email/mobile already exist..";
+		$_SESSION ["message"] = "Can't Update Email/mobile already exist..";
+		header ( "Location: ../views/update_profile.html?id=".$id );
+	
+	
+	}
+	else{
+	
 	$user_update = mysqli_query ( $connection, "UPDATE users SET  name ='" . $name . "', email ='" . $email . "', 
 			mobile='" . $mobile . "', dob='" . $dob . "',  state='" . $state . "',district='" . $district . "',city='" . $city . "',
 			locality='" . $locality . "',pincode='" . $pincode . "',qualification='" . $qualification . "',yearofpassing='" . $yearofpassing . "',
@@ -103,23 +117,22 @@ if (isset ( $_POST ['update'] )) {
 		}
 	}
 	
+	
 	if ($error1 || $error2 || $error3) {
 		
 		$_SESSION ['error'] = $error1 . $error2 . $error3;
-		// header("location:../views/update_profile.html");
+		 header("location:../views/update_profile.html");
 	} 
 
 	else {
 		$msg = "Successfully Updated";
-		$result = mysqli_query ( $connection, "select * FROM `users` WHERE email='$email' limit 1" );
-		
-		$row = mysqli_fetch_array ( $result );
 		$email_new = explode ( "@", $email );
 		$username = $email_new [0];
 		$_SESSION ["username"] = $username;
 		$_SESSION ["message"] = "RECORD UPDATED SUCCSESSFULLY";
-		// header ( "location:../views/dashboard.html" );
+		header ( "location:../views/dashboard.html" );
 	}
+}
 }
 $connection->close ();
 ?>
