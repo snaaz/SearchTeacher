@@ -130,7 +130,8 @@ if (isset ( $_POST ['update'] )) {
 		$username = $email_new [0];
 		$_SESSION ["username"] = $username;
 		$_SESSION ["message"] = "RECORD UPDATED SUCCSESSFULLY";
-		header ( "location:../views/dashboard.html" );
+
+		header ( "Location: ../views/update_profile.html?id=".$id );
 	}
 }
 }
