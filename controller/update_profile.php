@@ -40,7 +40,8 @@ if (isset ( $_POST ['update'] )) {
 	$id = $_POST ['id'];
 	$years=$_POST['years'];
 	$months= $_POST['months'];
-	
+	$experience = $years.'-'.$months;
+	echo $experience;
 	
 	$users = mysqli_query ( $connection, "select * from users where id != '$id' and (email='$email' or mobile='$mobile')   " );
 	$rows=mysqli_num_rows($users);
@@ -72,7 +73,7 @@ if (isset ( $_POST ['update'] )) {
 	$user_update = mysqli_query ( $connection, "UPDATE users SET  name ='" . $name . "', email ='" . $email . "', 
 			mobile='" . $mobile . "', dob='" . $dob . "',  state='" . $state_name . "',district='" . $district_name . "',city='" . $city . "',
 			locality='" . $locality . "',pincode='" . $pincode . "',qualification='" . $qualification . "',yearofpassing='" . $yearofpassing . "',
-			university='" . $university . "',class='" . $class . "',teaching_experience='".$years."' WHERE id = '" . $id . "'" );
+			university='" . $university . "',class='" . $class . "',teaching_experience='".$experience."' WHERE id = '" . $id . "'" );
 	
 	if (! $user_update) {
 		$error1 = mysqli_error ( $connection );
@@ -138,10 +139,10 @@ if (isset ( $_POST ['update'] )) {
 	}
 	
 	
-	if ($error1 || $error2 || $error3) {
+	if ($error1 || $error2 || $error3 || $error5 || $error5) {
 		
 		$_SESSION ['error'] = $error1 . $error2 . $error3;
-		 header("location:../views/update_profile.html");
+		header("location:../views/update_profile.html");
 	} 
 
 	else {

@@ -55,7 +55,12 @@ include '../controller/update_profile.php';
 			</div>
 
 			<?php
-	$row=mysqli_fetch_array($users) 
+	$row=mysqli_fetch_array($users);
+$myString = $row['teaching_experience'];
+$exp = explode('-', $myString);
+//print_r($exp); 
+//print_r($exp['0']);
+//print_r($exp['1']);
    ?>
 			<div class="col-sm-8">
 				<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
@@ -293,7 +298,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
 							</div>
 						</div>
 
-
+<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 						<div class="form-group">
 							<label class="col-sm-3" for="">Teaching Experience:</label>
 							<div class="col-sm-4">
@@ -301,10 +306,13 @@ while($class1=mysqli_fetch_array($class)){ ?>
 									<option name="years">select</option>
 									<?php 
 
-							for($i=0; $i<=20; $i++)
+							for($i=0; $i<=10; $i++)
 								{
-
-									echo "<option value=".$i.">".$i."</option>";
+								   if($i==$exp['0'])
+                                     {
+									echo "<option value=".$exp['0']." selected>".$i."</option>";
+                                    }
+                                echo "<option value=".$i.">".$i."</option>";
 								}
 									?>
 								</select> <label class="" for="">Years</label> 
@@ -313,8 +321,12 @@ while($class1=mysqli_fetch_array($class)){ ?>
 									<?php 
 
 							for($i=0; $i<=12; $i++)
-								{
-
+								{  
+                                      if($i==$exp['1'])
+                                     {
+									echo "<option value=".$exp['1']." selected>".$i."</option>";
+                                    }
+                                    
 									echo "<option value=".$i.">".$i."</option>";
 								}
 									?>
@@ -322,7 +334,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
 
 							</div>
 						</div>
-
+<?php } ?>
 						<div class="form-group">
 
 							<?php 
@@ -347,7 +359,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="submit" name="update" value="Update"
-									class="btn btn-info btn-sm" onclick="return alertbox();">
+									class="btn btn-info" onclick="return alertbox();">
 							</div>
 						</div>
 
