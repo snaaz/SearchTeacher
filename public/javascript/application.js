@@ -65,4 +65,30 @@ $(document).ready(function(){
 		    //} 
 
 		
+	        
+	        
+	        function getdistrict(val){
+	        	
+	        	$.ajax({
+	        		type: "GET",
+	        		url: "../../controller/select_district.php",
+	        		data: 'state_id=' +val,
+	        		dataType: 'json',
+	        		success: function(data){
+	        			var select = $('#district-list'); 
+	        			var options= '';
+	        			select.empty();
+	        		
+	        			for(var i=0; i<data.length; i++){
+	        			
+	        				options+="<option value='"+data[i].id+"'>"+data[i].name+"</option>"
+	        			}
+	        			select.append(options);
+	        		}
+
+	        	});
+	        }
+	        
+	        
+	        
 	});
