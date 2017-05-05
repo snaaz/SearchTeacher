@@ -28,10 +28,10 @@ if (isset ( $_POST ['submit'] )) {
 			$update = mysqli_query ( $connection, "update users set active=1 where email='$email' or mobile='$mobile' " );
 			$select = mysqli_query($connection, "select * from users where email= '$email' and active= 1");
 			$row = mysqli_fetch_array ( $select );
-			//$id = $row ['id'];
+			$id = $row ['id'];
 			$_SESSION ["id"] = $row ["id"];
-			//header ( "location:../views/update_profile.html?id=" .$id );
-			header ( 'Location: ../views/dashboard.html' );
+			header ( "location:../views/update_profile.html?id=" .$id );
+			//header ( 'Location: ../views/dashboard.html' );
 			
 		} else {
 			
@@ -48,10 +48,10 @@ if (isset ( $_POST ['submit'] )) {
 			$user = mysqli_query ( $connection, "select * from users where email='$email' limit 1 " );
 			$row = mysqli_fetch_array ( $user );
 			$_SESSION ["id"] = $row ["id"];
+			$id = $row ['id'];
 			echo "Sign up successfully please login";
-			// echo "sesssion";
-			// echo $_SESSION ["username"];
-			header ( 'Location: ../views/dashboard.html' );
+		//	header ( 'Location: ../views/dashboard.html' );
+			header ( "location:../views/update_profile.html?id=" .$id );
 		} else {
 			echo "Error: " . $sql . "<br>" . $connection->error;
 			$_SESSION ['error'] = "Error: " . $sql . "<br>" . $connection->error;

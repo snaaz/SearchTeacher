@@ -150,3 +150,6 @@ footer {
 	}
 }
 
+.img-circle {
+    border-radius: 50%;
+}

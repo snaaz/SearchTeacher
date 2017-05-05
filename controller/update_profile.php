@@ -9,14 +9,18 @@ $error5 = null;
 
 if (isset ( $_GET ['id'] )) {
 	$id = $_GET ['id'];
-	$users = mysqli_query ( $connection, "select * FROM `users` WHERE id='" . $id . "' " );
-	$states = mysqli_query ( $connection, "select * from states" );
-	$districts = mysqli_query ( $connection, "select * from district" );
+	$users = mysqli_query ( $connection, "select * FROM `users` WHERE id='" . $id . "'" );
+	$states = mysqli_query ( $connection, "select * from states order by sname" );
+	//$districts = mysqli_query ( $connection, "select * from district" );
 	$user_subjects = mysqli_query ( $connection, "select * from user_subjects where user_id = '" . $id . "'" );
 	$subjects = mysqli_query ( $connection, "select * from subjects" );
 	$class = mysqli_query ( $connection, "select * from class" );
 	$pics = mysqli_query ( $connection, "SELECT * FROM profile_pic where user_id='" . $id . "'" );
 }
+
+
+
+
 
 if (isset ( $_POST ['update'] )) {
 	$name = $_POST ['name'];
@@ -39,6 +43,14 @@ if (isset ( $_POST ['update'] )) {
 	
 	$users = mysqli_query ( $connection, "select * from users where id != '$id' and (email='$email' or mobile='$mobile')   " );
 	$rows=mysqli_num_rows($users);
+	$states1 = mysqli_query ( $connection, "select * from states where id='$state'" );
+	$states_name = mysqli_fetch_array($states1);
+	$state_name = $states_name['sname'];
+	
+	
+	$district1 = mysqli_query ( $connection, "select * from district where id='$district'" );
+	$districts_name = mysqli_fetch_array($district1);
+	$district_name = $districts_name['dname'];
 	
 	if ($rows> 0) {
 		echo "Email/mobile already exist..";
@@ -50,7 +62,7 @@ if (isset ( $_POST ['update'] )) {
 	else{
 	
 	$user_update = mysqli_query ( $connection, "UPDATE users SET  name ='" . $name . "', email ='" . $email . "', 
-			mobile='" . $mobile . "', dob='" . $dob . "',  state='" . $state . "',district='" . $district . "',city='" . $city . "',
+			mobile='" . $mobile . "', dob='" . $dob . "',  state='" . $state_name . "',district='" . $district_name . "',city='" . $city . "',
 			locality='" . $locality . "',pincode='" . $pincode . "',qualification='" . $qualification . "',yearofpassing='" . $yearofpassing . "',
 			university='" . $university . "',class='" . $class . "' WHERE id = '" . $id . "'" );
 	
