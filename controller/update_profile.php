@@ -10,15 +10,18 @@ $error5 = null;
 if (isset ( $_GET ['id'] )) {
 	$id = $_GET ['id'];
 	$users = mysqli_query ( $connection, "select * FROM `users` WHERE id='" . $id . "'" );
+	$row=mysqli_fetch_array($users);
 	$states = mysqli_query ( $connection, "select * from states order by sname" );
-	$districts = mysqli_query ( $connection, "select * from district" );
+	$state1=mysqli_query ( $connection, "select * from states where sname='".$row["state"]."'" );
+	$state2=mysqli_fetch_array($state1);
+	$districts = mysqli_query ( $connection, "select * from district where state_id = '" . $state2['id'] . "'" );
 	$user_subjects = mysqli_query ( $connection, "select * from user_subjects where user_id = '" . $id . "'" );
 	$subjects = mysqli_query ( $connection, "select * from subjects" );
 	
 	$class = mysqli_query ( $connection, "select * from class" );
 	$pics = mysqli_query ( $connection, "SELECT * FROM profile_pic where user_id='" . $id . "'" );
 	
-	$a = "myname";
+
 	
 }
 

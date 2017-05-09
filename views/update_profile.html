@@ -35,13 +35,12 @@ include '../controller/update_profile.php';
 			</div>
 
 			<?php
-	$row=mysqli_fetch_array($users);
+	
 $myString = $row['teaching_experience'];
 $exp = explode('-', $myString);
-
    ?>
 			<div class="col-sm-8">
-				<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
+				<?php  if(isset ($row['usertype']) and $row['usertype'] == 'teacher') { ?>
 				<h3 class="text-center">Teacher Profile</h3>
 				<?php } else { ?>
 				<h3 class="text-center">Student profile</h3>
@@ -135,14 +134,20 @@ while($state=mysqli_fetch_array($states)){ ?>
 							<label class="col-sm-1" for="district">District</label>
 							<div class="col-sm-3">
 								<select name="district" id="district-list" class="form-control">
-
+										<option value="">Select</option>
 									<?php while($district=mysqli_fetch_array($districts)){ ?>
+									
 									<?php if($district['dname'] == $row['district']){ ?>
 									<option value="<?php echo $district['id'];?>"
 										selected="selected" class="form-control"><?php echo $district['dname'];?>
 									</option>
+									<?php } else {?>
+									
+									<option value="<?php echo $district['id'];?>"
+									 class="form-control"><?php echo $district['dname'];?>
+									</option>
 									<?php } } ?>
-									<option value="">Select</option>
+									
 								</select>
 							</div>
 
