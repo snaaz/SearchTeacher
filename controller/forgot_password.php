@@ -31,8 +31,8 @@ if (isset ( $_POST ['send'] )) {
 			$_SESSION ['message'] = $message;
 			header ( 'location:../views/forgot_password.html' );
 		} else {
-			$message = "Account not found please signup !!";
-			echo $message;
+			$message = "NO Account Associated With This Email. Please Enter Valid Email.";
+			//echo $message;
 			$_SESSION ['message'] = $message;
 		}
 	}

@@ -14,8 +14,12 @@ if (isset ( $_GET ['id'] )) {
 	$districts = mysqli_query ( $connection, "select * from district" );
 	$user_subjects = mysqli_query ( $connection, "select * from user_subjects where user_id = '" . $id . "'" );
 	$subjects = mysqli_query ( $connection, "select * from subjects" );
+	
 	$class = mysqli_query ( $connection, "select * from class" );
 	$pics = mysqli_query ( $connection, "SELECT * FROM profile_pic where user_id='" . $id . "'" );
+	
+	$a = "myname";
+	
 }
 
 
@@ -58,6 +62,8 @@ if (isset ( $_POST ['update'] )) {
 	$districts_name = mysqli_fetch_array($district1);
 	$district_name = $districts_name['dname'];
 	
+	
+	mysqli_autocommit($connection,FALSE);
 	
 	// Validate email and mobile.........//
 	
@@ -104,7 +110,9 @@ if (isset ( $_POST ['update'] )) {
 		}
 	}
 	
-	if ($_FILES ['file'] ['size'] > 0) {
+	
+	$pic_type= array("gif","GIF","JPEG" ,"jpeg","jpg" ,"JPG");
+	if (($_FILES ['file'] ['size']  > 0) AND (in_array($_FILES ['file'] ['type'], $pic_type)) ) {
 		$file_name = rand ( 1000, 100000 ) . "-" . $_FILES ['file'] ['name'];
 		$file_loc = $_FILES ['file'] ['tmp_name'];
 		$file_type = $_FILES ['file'] ['type'];
@@ -120,7 +128,7 @@ if (isset ( $_POST ['update'] )) {
 		echo $img ['id'];
 		if ($img ['id']) {
 			$upload = mysqli_query ( $connection, "UPDATE profile_pic set profile_pic='" . $file_name . "',user_id='" . $id . "' WHERE user_id = '" . $id . "'" );
-			echo "kk";
+			//echo "kk";
 			if (! $upload) {
 				$error4 = mysqli_error ( $connection );
 				$error4 = explode ( ";", $error4, 3 );
@@ -137,12 +145,15 @@ if (isset ( $_POST ['update'] )) {
 			}
 		}
 	}
-	
-	
+	else{
+		$_SESSION ['message'] = "Profile image can't uploaded.Check files";
+		header("location:../views/update_profile.html?id=".$id);
+	}
+
 	if ($error1 || $error2 || $error3 || $error5 || $error5) {
 		
 		$_SESSION ['error'] = $error1 . $error2 . $error3;
-		header("location:../views/update_profile.html");
+		header("location:../views/update_profile.html?id=".$id);
 	} 
 
 	else {
@@ -156,5 +167,7 @@ if (isset ( $_POST ['update'] )) {
 	}
 }
 }
+mysqli_commit($connection);
+
 $connection->close ();
 ?>

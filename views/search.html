@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>welcome to dashboard</title>
+<?php 'include style&js_links.html'?>
+</head>
+<body>
+
+
+	<?php 
+	session_start();
+if(!$_SESSION ["username"]){
+header("location: ../index.html");
+}
+?>
+<?php
+include 'header.html';
+	
+?>
+
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<?php include 'lside.html'; ?>
+			</div>
+			
+			<div class="col-sm-5 text-center" style="color:#f4511e">
+			<?php if(isset($_SESSION["message"]))
+				{
+				echo $_SESSION["message"];
+				unset($_SESSION["message"]);
+				}
+			?>
+			</div>
+			<div class="col-sm-8">
+			
+			<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
+				<h3 class="text-center">SEARCH TEACHERS</h3>
+				<?php } else { ?>
+				<h3 class="text-center">SEARCH STUDENTS</h3>
+				<?php }?>
+				<div class="text-center" style="color: #f4511e">
+					<?php if(isset($_SESSION["message"]))
+				{
+				echo $_SESSION["message"];
+				unset($_SESSION["message"]);
+				}
+			?>
+				</div>
+
+				<hr>
+				<div class="col-sm-12 text-left">
+
+
+					<form method="post" action="../controller/search.php"
+						name="form"  enctype="multipart/form-data"
+						class="form-horizontal">
+						
+						
+			<?php $row=mysqli_fetch_array($users);?>			
+						<div class="form-group">
+	<label class="col-sm-3" >Name</label>
+	<label class="col-sm-5"><?php echo $row['name'];?></label>  
+ </div>
+	<div class="form-group">
+	<label class="col-sm-3">Email</label>
+	<label class="col-sm-5"><?php echo $row['email'];?></label>
+</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Phone</label>
+	<label class="col-sm-5"><?php echo $row['phone'];?></label>
+	</div>
+	
+	
+	<input type="hidden" name="id" value="<?php echo $row['id'];?>">
+						
+			
+			</form>
+			
+			</div>
+			</div>
+			<div class="col-sm-2 sidenav">
+				<?php include 'rside.html'?>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<?php include 'footer.html';
+		
+		?>
+		
+
+
+</body>
+</html>
