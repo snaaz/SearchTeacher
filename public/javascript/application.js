@@ -74,10 +74,10 @@ $(document).ready(function(){
 	           }
 
 	           $( event.target ).blur();
-	              
-	           console.log( options );
-	           
-	           $(this).val = options;
+	         
+	          document.getElementById("sub").value= options;
+	        //  $('#sub').val = options;
+	        //  console.log(document.getElementById("sub").value );
 	           return false;
 	        });
 	        

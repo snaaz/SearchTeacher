@@ -42,13 +42,17 @@ if (isset ( $_POST ['update'] )) {
 	$qualification = $_POST ['qualification'];
 	$yearofpassing = $_POST ['year-of-passing'];
 	$university = $_POST ['university'];
-	$subject = $_POST ['subject'];
+	$subject = $_POST ['sub'];
 	$class = $_POST ['class'];
 	$id = $_POST ['id'];
 	$years=$_POST['years'];
 	$months= $_POST['months'];
 	$experience = $years.'-'.$months;
-	echo $experience;
+	
+	echo $subject;
+	$string = explode(',',$subject);
+	 $count=count($string);
+	//echo $string[2];
 	
 	$users = mysqli_query ( $connection, "select * from users where id != '$id' and (email='$email' or mobile='$mobile')   " );
 	$rows=mysqli_num_rows($users);
@@ -153,9 +157,9 @@ if (isset ( $_POST ['update'] )) {
 		header("location:../views/update_profile.html?id=".$id);
 	}
 
-	if ($error1 || $error2 || $error3 || $error5 || $error5) {
+	if ($error1 || $error2 || $error3 || $error4 || $error5) {
 		
-		$_SESSION ['error'] = $error1 . $error2 . $error3;
+		$_SESSION ['error'] = $error1 . $error2 . $error3.$error4.$error5;
 		header("location:../views/update_profile.html?id=".$id);
 	} 
 
