@@ -299,7 +299,10 @@ while($class1=mysqli_fetch_array($class)){ ?>
                                      {
 									echo "<option value=".$exp['0']." selected>".$val."</option>";
                                     }
+                                 else
+								{
                                 echo "<option value=".$val.">".$val."</option>";
+                                 }
 								}
 									?>
 								</select> <label class="" for="">Years</label> 
@@ -313,8 +316,9 @@ while($class1=mysqli_fetch_array($class)){ ?>
                                      {
 									echo "<option value=".$exp['1']." selected>".$i."</option>";
                                     }
-                                    
+                                   else{ 
 									echo "<option value=".$i.">".$i."</option>";
+									}
 								}
 									?>
 								</select> <label class="" for="">Months</label>
