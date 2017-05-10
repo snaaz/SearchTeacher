@@ -232,17 +232,21 @@ while($state=mysqli_fetch_array($states)){ ?>
 							<?php } else {?>
 							<label class="col-sm-3" for="subject">Subject To Learn:</label>
 							<?php } ?>
-							<div class="col-sm-3">
+							<div class="col-sm-3">			
 							
 		 <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
         <span>select</span> <span class="caret"></span></button>
 <ul class="dropdown-menu">
+
+
 <?php while($subject=mysqli_fetch_array($subjects)){ ?>
+
   <li><a href="#" class="small" data-value="<?php echo $subject['subject_name'];?>" tabIndex="-1">
-  <input type="checkbox" value="<?php echo $subject['subject_name'];?>" name="select[]"/>&nbsp;<?php echo $subject['subject_name']; ?>
+  
+  <input type="checkbox" value="<?php echo $subject['subject_name'];?>" name="select[]" <?php if(in_array($subject['subject_name'],$res)) { echo 'checked'; } ?>  >&nbsp;<?php echo $subject['subject_name']; ?>
   </a></li>
 
-<?php } ?>
+<?php  } ?>
 </ul>
 <input type="hidden" id="sub" name="sub" value="">
 
