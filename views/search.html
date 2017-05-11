@@ -17,6 +17,7 @@ header("location: ../index.html");
 ?>
 <?php
 include 'header.html';
+include '../controller/search.php'
 	
 ?>
 
@@ -37,9 +38,9 @@ include 'header.html';
 			<div class="col-sm-8">
 			
 			<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
-				<h3 class="text-center">SEARCH TEACHERS</h3>
-				<?php } else { ?>
 				<h3 class="text-center">SEARCH STUDENTS</h3>
+				<?php } else { ?>
+				<h3 class="text-center">SEARCH TEACHERS</h3>
 				<?php }?>
 				<div class="text-center" style="color: #f4511e">
 					<?php if(isset($_SESSION["message"]))
@@ -58,25 +59,77 @@ include 'header.html';
 						name="form"  enctype="multipart/form-data"
 						class="form-horizontal">
 						
-						
-			<?php $row=mysqli_fetch_array($users);?>			
-						<div class="form-group">
-	<label class="col-sm-3" >Name</label>
-	<label class="col-sm-5"><?php echo $row['name'];?></label>  
- </div>
-	<div class="form-group">
-	<label class="col-sm-3">Email</label>
-	<label class="col-sm-5"><?php echo $row['email'];?></label>
-</div>
-	<div class="form-group">
-	<label class="col-sm-3" >Phone</label>
-	<label class="col-sm-5"><?php echo $row['phone'];?></label>
-	</div>
+				
 	
-	
-	<input type="hidden" name="id" value="<?php echo $row['id'];?>">
 						
-			
+			<?php while($row1=mysqli_fetch_array($search_users)){
+$myString = $row1['teaching_experience'];
+$exp = explode ( '-', $myString );
+ ?>			
+						
+	  
+	  <div id="contact" class="container-fluid bg-grey">
+					<h2 class="text-center"><?php echo $row1['name'];?></h2>
+					<div class="row">
+						<div class="col-sm-5">
+							<p>Qualification:
+							<?php echo $row1['qualification'];?>
+							</p>
+							
+							<p>Teaching Experience:
+							<?php echo $exp[0];?> Years
+							<?php echo $exp[1];?> Months
+							</p>
+							
+							<p>Teaches:
+							:
+							<?php echo $row1['qualification'];?>
+							</p>
+							
+							
+							<p>
+								<span class="glyphicon glyphicon-map-marker"></span><?php echo $row1['locality'];?> 
+								<?php echo $row1['city'];?> <?php echo $row1['pincode'];?>
+							</p>
+							<p>
+								<span class="glyphicon glyphicon-phone"></span> <?php echo $row1['mobile'];?>
+							</p>
+							<p>
+								<span class="glyphicon glyphicon-envelope"></span><?php echo $row1['email'];?>
+								
+							</p>
+						</div>
+						<div class="col-sm-7 slideanim">
+							<div class="row">
+							<div class="col-sm-3 pull-right">
+							<?php //$pics = mysqli_query ( $connection, "SELECT * FROM users where id='" . $row1['id'] . "'" );
+								//echo $row1['id'];
+							
+                              //  echo mysqli_num_rows($pics);
+                              // $pic=mysqli_fetch_array($pics);
+														?>
+							<image src="../public/photos/<?php echo $pic['profile_pic']?>"
+								width="100" height="100" class="img-circle"></image>
+							</div>
+							
+								
+							</div>
+							
+							<br>
+							<div class="row">
+								<div class="col-sm-8 form-group">
+									<button class="btn btn-default pull-right" type="submit">Send Email</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	  
+	  
+	
+	<input type="hidden" name="id" value="<?php echo $row1['id'];?>">
+						
+	<?php } ?>		
 			</form>
 			
 			</div>

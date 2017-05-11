@@ -168,7 +168,7 @@ if (isset ( $_POST ['update'] )) {
 		$_SESSION ["username"] = $username;
 		$_SESSION ["message"] = "RECORD UPDATED SUCCSESSFULLY";
 		
-		 header ( "Location: ../views/update_profile.html?id=".$id );
+		il. header ( "Location: ../views/update_profile.html?id=".$id );
 	}
 }
 mysqli_commit ( $connection );
