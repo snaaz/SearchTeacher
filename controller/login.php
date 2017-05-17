@@ -16,6 +16,8 @@ if ($row)
 	$username = $email_new [0];
 	$_SESSION ["username"] = $username;
 	$_SESSION ["id"] = $row ["id"];
+	$_SESSION ["usertype"] = $row['usertype'];
+	//echo $_SESSION ["usertype"];
 	
 	$hash = hash_equals ( $row ['password'], crypt ( $userpass, $row ['password'] ) );
 	if ($hash) 

@@ -126,3 +126,12 @@ function Checkfiles() {
 		return false;
 	}
 };
+
+
+function checkEmpty() {
+	var valueofId=document.getElementById("search-text").value;
+	if (!valueofId) {
+	        alert("Please insert search value");
+	        return false;
+	    }
+	};

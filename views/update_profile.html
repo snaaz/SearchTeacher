@@ -236,7 +236,8 @@ while($state=mysqli_fetch_array($states)){ ?>
 <ul class="dropdown-menu">
 
 
-<?php while($subject=mysqli_fetch_array($subjects)){ ?>
+<?php while($subject=mysqli_fetch_array($subjects)){ 
+?>
 
   <li><a href="#" class="small" data-value="<?php echo $subject['subject_name'];?>" tabIndex="-1">
   

@@ -167,11 +167,11 @@ if (isset ( $_POST ['update'] )) {
 		$username = $email_new [0];
 		$_SESSION ["username"] = $username;
 		$_SESSION ["message"] = "RECORD UPDATED SUCCSESSFULLY";
-		
-		il. header ( "Location: ../views/update_profile.html?id=".$id );
+		mysqli_commit ( $connection );
+	 header ( "Location: ../views/update_profile.html?id=".$id );
 	}
 }
-mysqli_commit ( $connection );
+
 
 $connection->close ();
 ?>

@@ -19,6 +19,7 @@ if (isset ( $_POST ['submit'] )) {
 	$email_new = explode ( "@", $email );
 	$username = $email_new [0];
 	$_SESSION ["username"] = $username;
+	$_SESSION ["usertype"] = $usertype;
 	// $_SESSION ["id"] = $row["id"];
 	
 	$rows = mysqli_num_rows ( $users );
