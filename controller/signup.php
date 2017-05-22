@@ -22,22 +22,24 @@ if (isset ( $_POST ['submit'] )) {
 	$_SESSION ["usertype"] = $usertype;
 	// $_SESSION ["id"] = $row["id"];
 	
-	$rows = mysqli_num_rows ( $users );
+	$no_of_users = mysqli_num_rows ( $users );
 	
-	if ($rows > 0) {
-		if ($rows ['active']==0) {
+	if ($no_of_users > 0) {
+
+	
+		if ($user ['active']==0) {
 			$update = mysqli_query ( $connection, "update users set active=1 where email='$email' or mobile='$mobile' " );
 			$select = mysqli_query($connection, "select * from users where email= '$email' and active= 1");
 			$row = mysqli_fetch_array ( $select );
 			$id = $row ['id'];
 			$_SESSION ["id"] = $row ["id"];
 			header ( "location:../views/update_profile.html?id=" .$id );
-			//header ( 'Location: ../views/dashboard.html' );
+			
 			
 		} else {
 			
-			echo "Email/mobile already exist..";
-			$_SESSION ["message"] = "Can't Sign Up Email/mobile already exist..";
+			echo "Email/mobile already exist. Please Login";
+			$_SESSION ["message"] = "Can't Sign Up Email/mobile already exist. Please Login";
 			header ( 'Location: ../index.html' );
 		}
 	} else {
@@ -51,7 +53,6 @@ if (isset ( $_POST ['submit'] )) {
 			$_SESSION ["id"] = $row ["id"];
 			$id = $row ['id'];
 			echo "Sign up successfully please login";
-		//	header ( 'Location: ../views/dashboard.html' );
 			header ( "location:../views/update_profile.html?id=" .$id );
 		} else {
 			echo "Error: " . $sql . "<br>" . $connection->error;

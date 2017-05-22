@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 		$('#confirm_password').on('keyup', function () {
 		    if ($('#password').val() == $('#confirm_password').val()) {
-		    	 $('#message').html('perfect').css('color', 'green');
+		    	 $('#message').html('').css('color', 'green');
 		    } else 
 		        $('#message').html('confirm password must be same').css('color', 'red');
 		});
@@ -130,8 +130,23 @@ function Checkfiles() {
 
 function checkEmpty() {
 	var valueofId=document.getElementById("search-text").value;
-	if (!valueofId) {
-	        alert("Please insert search value");
+	if((valueofId.match(/\s/g)) || (!valueofId)){
+	        alert("Please insert valid input");
 	        return false;
 	    }
 	};
+
+	
+	function validateRadio() {
+		var type = document.getElementsByName("select");
+        if (type[0].checked == false && type[1].checked == false) {
+        	alert("You must select your teacher/student");
+        	$('#teacher').html('').css('color', 'green');
+        	$('#student').html('').css('color', 'green');
+        	return false; 
+        }
+        else{
+        	return true;
+        }
+    
+		};

@@ -64,7 +64,7 @@
 									<div class="form-group">
 
 										<input type="text" name="mobile" id="mobile" tabindex="1"
-											class="form-control" placeholder="Mobile" value=""
+											class="form-control" placeholder="Mobile" value="" title="please insert valid nubmer"
 											pattern='^\d{10}$' autocomplete="off" required>
 									</div>
 
@@ -75,7 +75,7 @@
 
 										<input type="password" name="password" id="password"
 											tabindex="2" class="form-control" placeholder="Password"
-											pattern=".{6,}" required title="6 characters minimum"
+											pattern=".{6,}"  title="6 characters minimum required"
 											autocomplete="off" required>
 									</div>
 
@@ -103,7 +103,7 @@
 											</div>
 
 											<div class="col-xs-5 pull-right">
-												<input type="submit" name="submit" id="" tabindex="4"
+												<input type="submit" name="submit" id="" tabindex="4" onclick="return validateRadio()"
 													class="form-control btn btn-success" value="Register">
 											</div>
 										</div>
