@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,15 +56,15 @@ include '../controller/search.php'
 				</div>
 
 				
-					<form method="post" action="../controller/search.php"
-						name="form"  enctype="multipart/form-data" onsubmit="return checkEmpty()"
+					<form 
+						name="form"
 						class="form-horizontal">
 								
-   <div id="custom-search-input" class="col-sm-8">
+                        <div id="custom-search-input" class="col-sm-8">
                             <div class="input-group col-sm-6 pull-right">
-                                <input type="text" class="  search-query form-control" name="search-value" id="search-text" placeholder="Enter Subject/Class/Locality" />
+                                <input type="text" class="  search-query form-control" name="search-key" id="search-text" value="<?= isset($_GET ['search-key']) ? $_GET ['search-key'] : "" ?>" placeholder="Enter Subject/Class/Locality" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-danger" type="submit" name="search">
+                                    <button class="btn btn-danger" type="submit">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
@@ -73,8 +72,16 @@ include '../controller/search.php'
                         </div>
 
 		<br>
-		<br>		 
+		<br>	
+		 
+                   <!-- <input type="hidden" name="id" value="<?php echo $_SESSION['id'];?>">	 -->	
+			            </form>
+			            
+			            <?php 
+			            
+			            if($record_available){
 
+ ?>
  <div class="panel panel-default panel-table">
               
               <div class="panel-body">
@@ -90,19 +97,23 @@ include '../controller/search.php'
                   </thead>
                   <tbody>
                   
-                  <?php while($row1=mysqli_fetch_array($search_users)){
+                  
+                  <?php  
+          
 
- ?>			
+foreach ($queryArray as $value) {
+
+                  ?>	
                           <tr>
-                            <td> <?php echo $row1['name'];?>  </td>
-                            <td> <?php echo $row1['locality'];?> 
-								<?php echo $row1['city'];?> <?php echo $row1['pincode'];?></td>
+                            <td> <?php echo $value['name'];?>  </td>
+                            <td> <?php echo $value['locality'];?> 
+								<?php echo $value['city'];?> <?php echo $value['pincode'];?></td>
                             <td>John Doe</td>
                             <td>johndoe@example.com</td>
                             <td><a href="#">View</a></td>
                           </tr>
 						
-	<?php } ?>	                        
+	<?php   }  ?>	                        
         
                         </tbody>
                 </table>
@@ -128,11 +139,12 @@ include '../controller/search.php'
                 </div>
               </div>
             </div>
+            
+            <?php } ?>
            
 
 			
-<input type="hidden" name="id" value="<?php echo $_SESSION['id'];?>">		
-			</form>
+
 			
 			
 			</div>
