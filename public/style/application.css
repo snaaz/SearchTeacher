@@ -130,6 +130,10 @@ ul.dropdown-lr {
        background-color: #f2dede;
       height: 100%;
 }
+.sidenav a{
+		color: #756e6e;
+	
+	}
 
 /* Set black background color, white text and some padding */
 footer {
@@ -145,6 +149,7 @@ footer {
 		height: auto;
 		padding: 20px;
 	}
+	
 	.row.content {
 		height: auto;
 	}
@@ -167,4 +172,12 @@ footer {
 .stylish-input-group button{
     border:0;
     background:transparent;
+}
+
+.pagination{
+  margin:0; 
+}
+.pagination li a{
+  width:34px;
+  height:34px;
 }
