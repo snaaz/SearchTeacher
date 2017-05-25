@@ -29,10 +29,14 @@ include 'header.html';
 				echo $_SESSION["message"];
 				unset($_SESSION["message"]);
 				}
+
 			?>
 			</div>
 			<div class="col-sm-8">
-			
+			<div class="col-sm-1 pull-right">
+			<a href="search.html?page=<?php echo $_GET['page'];?>&search-key=<?php echo $_GET['search-key'] ; ?>" class="btn btn-info">
+			Back</a>
+			</div>
 			<form  action="" name="form"  class="form-horizontal">
   
 
