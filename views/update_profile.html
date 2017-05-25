@@ -4,10 +4,6 @@
 <meta charset="ISO-8859-1">
 <title>Update profile</title>
 
-
-
-
-
 </head>
 <body>
 
@@ -16,12 +12,11 @@ include 'header.html';
 include '../controller/update_profile.php';
 	
 ?>
-
 	<?php if(!($_GET['id']==$_SESSION['id'])) { 
 	header("location:../views/dashboard.html");
     }
 	?>
-	
+
 	<?php  if(!$_SESSION ["username"]){ 
 	header("location:../index.html");
     }
@@ -131,20 +126,20 @@ while($state=mysqli_fetch_array($states)){ ?>
 							<label class="col-sm-1" for="district">District</label>
 							<div class="col-sm-3">
 								<select name="district" id="district-list" class="form-control">
-										<option value="">Select</option>
+									<option value="">Select</option>
 									<?php while($district=mysqli_fetch_array($districts)){ ?>
-									
+
 									<?php if($district['dname'] == $row['district']){ ?>
 									<option value="<?php echo $district['id'];?>"
 										selected="selected" class="form-control"><?php echo $district['dname'];?>
 									</option>
 									<?php } else {?>
-									
+
 									<option value="<?php echo $district['id'];?>"
-									 class="form-control"><?php echo $district['dname'];?>
+										class="form-control"><?php echo $district['dname'];?>
 									</option>
 									<?php } } ?>
-									
+
 								</select>
 							</div>
 
@@ -229,26 +224,33 @@ while($state=mysqli_fetch_array($states)){ ?>
 							<?php } else {?>
 							<label class="col-sm-3" for="subject">Subject To Learn:</label>
 							<?php } ?>
-							<div class="col-sm-3">			
-							
-		 <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-        <span>select</span> <span class="caret"></span></button>
-<ul class="dropdown-menu">
+							<div class="col-sm-3">
+
+								<button type="button"
+									class="btn btn-default btn-sm dropdown-toggle"
+									data-toggle="dropdown">
+									<span>select</span> <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
 
 
-<?php while($subject=mysqli_fetch_array($subjects)){ 
+									<?php while($subject=mysqli_fetch_array($subjects)){ 
 ?>
 
-  <li><a href="#" class="small" data-value="<?php echo $subject['subject_name'];?>" tabIndex="-1">
-  
-  <input type="checkbox" value="<?php echo $subject['subject_name'];?>" name="select[]" <?php if(in_array($subject['subject_name'],$res)) { echo 'checked'; } ?>  >&nbsp;<?php echo $subject['subject_name']; ?>
-  </a></li>
+									<li><a href="#" class="small"
+										data-value="<?php echo $subject['subject_name'];?>"
+										tabIndex="-1"> <input type="checkbox"
+											value="<?php echo $subject['subject_name'];?>"
+											name="select[]"<?php
+											if(in_array($subject['subject_name'],$res)) { echo 'checked';
+											} ?> >&nbsp;<?php echo $subject['subject_name']; ?>
+									</a></li>
 
-<?php  } ?>
-</ul>
-<input type="hidden" id="sub" name="sub" value="">
+									<?php  } ?>
+								</ul>
+								<input type="hidden" id="sub" name="sub" value="">
 
-  </div>
+							</div>
 						</div>
 
 						<div class="form-group">
@@ -278,7 +280,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
 							</div>
 						</div>
 
-<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
+						<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 						<div class="form-group">
 							<label class="col-sm-3" for="">Teaching Experience:</label>
 							<div class="col-sm-4">
@@ -303,8 +305,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
                                  }
 								}
 									?>
-								</select> <label class="" for="">Years</label> 
-								<select name="months">
+								</select> <label class="" for="">Years</label> <select name="months">
 									<option name="months">select</option>
 									<?php 
 
@@ -323,7 +324,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
 
 							</div>
 						</div>
-<?php } ?>
+						<?php } ?>
 						<div class="form-group">
 
 							<?php 
@@ -335,8 +336,7 @@ while($class1=mysqli_fetch_array($class)){ ?>
 								width="100" height="100" class="img-circle"></image>
 							<?php } ?>
 
-							<label class="col-sm-3" for="img">Profile Image:</label> 
-							<input
+							<label class="col-sm-3" for="img">Profile Image:</label> <input
 								type="file" id="filename" name="file" accept="image/*"
 								onchange="Checkfiles();">
 
@@ -366,8 +366,8 @@ while($class1=mysqli_fetch_array($class)){ ?>
 		</div>
 
 	</div>
-	
-	
+
+
 
 	<?php include 'footer.html'; ?>
 

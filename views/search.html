@@ -103,7 +103,7 @@ include '../controller/search.php'
 								<?php echo $value['city'];?> <?php echo $value['pincode'];?> </td>
                             <td><?php echo $value['subject_name'];?></td>
                             <td><?php echo $value['class'];?></td>
-                            <td><a href="#">View</a></td>
+                            <td><a href="view.html?page=<?php echo $_GET['page'];?>&search-key=<?php echo $key ; ?>&id=<?php echo $value['id'];?>">View</a></td>
                           </tr>
 						
 	<?php   }  ?>	                        
@@ -127,10 +127,6 @@ for ($i=1; $i<=$total_pages; $i++) { ?>
 <?php } ?>
 
                      
-                    </ul>
-                    <ul class="pagination visible-xs pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">»</a></li>
                     </ul>
                   </div>
                 </div>

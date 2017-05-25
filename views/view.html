@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>view details</title>
+</head>
+<body>
+
+
+	<?php 
+	session_start();
+include '../controller/view.php';
+if(!$_SESSION ["username"]){
+header("location: ../index.html");
+}
+?>
+<?php
+include 'header.html';
+?>
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<?php include 'lside.html'; ?>
+			</div>
+			
+			<div class="col-sm-5 text-center" style="color:#f4511e">
+			<?php if(isset($_SESSION["message"]))
+				{
+				echo $_SESSION["message"];
+				unset($_SESSION["message"]);
+				}
+			?>
+			</div>
+			<div class="col-sm-8">
+			
+			<form  action="" name="form"  class="form-horizontal">
+  
+
+	<h3 class="text-center"><?php echo $row['name'];?></h3>
+	<hr>
+ <div class="col-sm-8 text-left">
+	<div class="form-group">
+	<label class="col-sm-3">Email</label>
+	<label class="col-sm-5"><?php echo $row['email'];?></label>
+	
+</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Mobile</label>
+	<label class="col-sm-5"><?php echo $row['mobile'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Address</label>
+	<label class="col-sm-5"><?php echo $row['locality'];?></label>
+	</div>
+	<div class="form-group">
+	 <label class="col-sm-3" >City</label>
+	<label class="col-sm-5"><?php echo $row['city'];?> <?php echo $row['pincode'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >State</label>
+	<label class="col-sm-5"><?php echo $row['state'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >State</label>
+	<label class="col-sm-5"><?php echo $row['district'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Qualification</label>
+	<label class="col-sm-5"><?php echo $row['qualification'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >College/University</label>
+	<label class="col-sm-5"><?php echo $row['university'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Passout</label>
+	<label class="col-sm-5"><?php echo $row['yearofpassing'];?></label>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Subject To Teaches</label>
+	
+<?php	while ( $sub = mysqli_fetch_array ( $subject_teaches ) ) { ?>
+ 	  <?php echo $sub ['subject_name'];?>
+ 	
+ <?php	} ?>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-3" >Class To Teaches</label>
+	<label class="col-sm-5"><?php echo $row['class'];?></label>
+	</div>
+	
+	<div class="form-group">
+	<label class="col-sm-3" >Teaching Experience</label>
+	<label class="col-sm-5"><?php echo $exp['0']; echo "  years  "; echo $exp['1']; echo "  Months ";?></label>
+	</div>
+	
+	<input type="hidden" name="id" value="<?php echo $row['id'];?>">	
+	
+</div>
+<div class="col-sm-4">
+
+<?php 
+  while($pic=mysqli_fetch_array($pics))
+ {
+  ?>
+
+							<image src="../public/photos/<?php echo $pic['profile_pic']?>"
+								width="100" height="100"></image>
+							<?php } ?>
+	
+</div>
+</form>
+						
+</div>
+			<div class="col-sm-2 sidenav">
+				<?php include 'rside.html'?>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<?php include 'footer.html';
+		
+		?>
+		
+
+
+</body>
+</html>
