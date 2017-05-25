@@ -103,7 +103,7 @@ include '../controller/search.php'
 								<?php echo $value['city'];?> <?php echo $value['pincode'];?> </td>
                             <td><?php echo $value['subject_name'];?></td>
                             <td><?php echo $value['class'];?></td>
-                            <td><a href="view.html?page=<?php echo $_GET['page'];?>&search-key=<?php echo $key ; ?>&id=<?php echo $value['id'];?>">View</a></td>
+                            <td><a href="view.html?page=<?php echo (isset($_GET['page']) ?  $_GET['page'] : "1" )  ; ?>&search-key=<?php echo $key ; ?>&id=<?php echo $value['id'];?>">View</a></td>
                           </tr>
 						
 	<?php   }  ?>	                        
@@ -122,9 +122,13 @@ include '../controller/search.php'
 <?php
 
 for ($i=1; $i<=$total_pages; $i++) { ?>
-          <li>  <a href='search.html?page=<?php echo $i ; ?>&search-key=<?php echo $key ; ?>'> <?php echo $i ;?></a> <li>
+               <?php if($_GET['page']==$i){?>
+               <li><a class="disabled_a"><?php echo $i ;?></a></li>
+               <?php } else {?>
+               
+          <li>  <a href='search.html?page=<?php echo $i ; ?>&search-key=<?php echo $key ; ?>' > <?php echo $i ;?></a> <li>
            
-<?php } ?>
+<?php } } ?>
 
                      
                     </ul>

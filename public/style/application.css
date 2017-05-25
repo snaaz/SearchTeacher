@@ -102,9 +102,9 @@ ul.dropdown-lr {
 }
 
 .panel {
-	border: 1px solid #f4511e;
-	border-radius: 0 !important;
-	transition: box-shadow 0.5s;
+	
+	border-radius: 5px !important;
+	transition: box-shadow 0.0s;
 }
 
 .panel:hover {
@@ -180,4 +180,9 @@ footer {
 .pagination li a{
   width:34px;
   height:34px;
+}
+
+.disabled_a{
+	background-color: #ddd !important;
+	
 }
