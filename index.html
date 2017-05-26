@@ -198,14 +198,15 @@
 ?>
 		<h1>Find Your Teacher</h1>
 		<p>We specialize in teaching</p>
-		<form>
+		<form 	name="form" action="views/search_teacher.html" class="form-horizontal" onsubmit="return checkEmpty()">
 			
 			 <div id="" class="col-sm-8">
 			<div class="input-group input-group-lg col-sm-6 pull-right">
 			
-<input type="text" name="search" class="form-control" id="" placeholder="Enter class/Subject/location" required>
+<input type="text" class="form-control"  name="search-key" id="search-text" value="<?= isset($_GET ['search-key']) ? $_GET ['search-key'] : "" ?>" placeholder="Enter Subject/Class/Locality" >
+
 <span class="input-group-btn">
-<button type="submit" name="search" id="" class="btn btn-secondary">Search</button>
+<button type="submit" class="btn btn-secondary">Search</button>
 </span>
 			</div>
 			</div>
