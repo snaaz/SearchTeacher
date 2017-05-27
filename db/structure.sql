@@ -741,3 +741,12 @@ insert into district(dname,state_id) values("Hooghly",28);
 insert into district(dname,state_id) values("Howrah",28);
 insert into district(dname,state_id) values("Medinipur",28);
 insert into district(dname,state_id) values("Puruliya",28);
+
+
+
+CREATE TABLE `rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rate` int(11) DEFAULT NULL,
+  `user_id` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)

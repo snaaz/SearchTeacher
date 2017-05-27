@@ -7,19 +7,14 @@ $(document).ready(function(){
 		        $('#message').html('confirm password must be same').css('color', 'red');
 		});
 			
-		
-	
-
-
-			
+					
 		var divHeight = $('.col-sm-8').height(); 
 	    $('.col-sm-2').css('min-height', divHeight+'px');
 	    
 	    
 	    var max = new Date().getFullYear(),
 	    min = max - 47,
-
-	     select = document.getElementById('year-of-passing');
+        select = document.getElementById('year-of-passing');
             
 	        for (var i = min; i<=max; i++){
 	           var opt = document.createElement('option');
@@ -82,6 +77,22 @@ $(document).ready(function(){
 	        });
 	        
 	       
+	       
+                $(".ratingRadio").click(function () {
+                	           
+                    $.post('../controller/rating.php',{rate:$(this).val()},function(d){
+                    	
+                    	console.log("hiii");
+                        if(d>0)
+                        {
+                            console.log("hii");
+                        }else{
+                            alert('Thanks For Rating');
+                        }
+                    });
+                    $(this).attr("checked");
+                });
+           
 	        
 	       
 	        
@@ -150,3 +161,5 @@ function checkEmpty() {
         }
     
 		};
+
+ 

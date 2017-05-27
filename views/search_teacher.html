@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -102,7 +101,22 @@ include '../controller/search_teacher.php';
 								<?php echo $value['city'];?> <?php echo $value['pincode'];?> </td>
                             <td><?php echo $value['subject_name'];?></td>
                             <td><?php echo $value['class'];?></td>
-                            <td><a href="">View</a></td>
+                            <td><a href="#contactModal" role="button" data-toggle="modal" class=""> View</a></td>
+                            <div id="contactModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- dialog body -->
+      <div class="modal-body">
+      <br>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+       <h4 class="text-center"> Please /Login To See Teachers Details.</h4>
+      </div>
+      <!-- dialog buttons -->
+      <div class="modal-footer"><a href="../index.html" role="button" class="btn btn-primary">OK</a></div>
+    </div>
+  </div>
+</div>
                           </tr>
 						
 	<?php   }  ?>	                        
