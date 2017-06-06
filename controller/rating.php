@@ -2,25 +2,29 @@
 include ('connection.php');
 session_start ();
 
-$teacher_id=$_GET['id'];
-echo $teacher_id;
+
+
 if (isset($_POST['rate']) && !empty($_POST['rate'])) {
 	
 	
-	$id=$_SESSION['id'];
-	echo $_POST['rate'];
+	$teacher_id= $_POST['id'];
+	$id= $_SESSION['id'];
 	$rate = $connection->real_escape_string($_POST['rate']);
 	// check if user has already rated
-	$sql = "SELECT `id` FROM `rating` WHERE `user_id`='" . $id . "'";
+	$sql = "SELECT `id` FROM `rating` WHERE `user_id`='" . $id . "' and teacher_id='" . $teacher_id . "' ";
 	$result = $connection->query($sql);
 	$row = $result->fetch_assoc();
+	echo $result->num_rows;
 	if ($result->num_rows > 0) {
-		echo $row['id'];
+	 $sql ="update rating set rate='".$rate."' where user_id='" . $id . "' and teacher_id='" . $teacher_id . "'"  ;
+	 if (mysqli_query($connection, $sql)) {
+	 	echo "update";
+	 }
 	} else {
 
-		$sql = "INSERT INTO `rating` ( `rate`, `user_id`,`teacher_id`) VALUES ('" . $rate . "', '" . $id . "'); ";
+		$sql = "INSERT INTO `rating` ( `rate`, `user_id`,`teacher_id`) VALUES ('" . $rate . "', '" . $id . "','".$teacher_id."'); ";
 		if (mysqli_query($connection, $sql)) {
-			echo "0";
+			echo "insert";
 		}
 	
 	}

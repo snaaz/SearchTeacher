@@ -1,11 +1,11 @@
 <p>
-	<a href="update_profile.html?id=<?php echo $_SESSION ['id']; ?>">Update Profile</a>
+	<a href="profile.html?user=<?php echo $_SESSION['encrypted_id']; ?>">Update Profile</a>
 </p>
 <p>
 	<a href="reset_password.html">Reset Password</a>
 </p>
 
 <p>
-	<a href="../controller/delete_account.php?id=<?php echo $_SESSION['id']; ?> ">Delete Account</a>
+	<a href="../controller/delete_account.php?user=<?php echo $_SESSION['encrypted_id']; ?> ">Delete Account</a>
 </p>
 

@@ -5,17 +5,18 @@ session_start ();
 $email = $_POST ['email'];
 $userpass = $_POST ['password'];
 
-$result = mysqli_query ( $connection, "select * FROM `users` WHERE email='$email' and active=1 limit 1" );
+$result = mysqli_query ( $connection, "select * FROM `users` WHERE email='$email' limit 1" );
 
 $row = mysqli_fetch_array ( $result );
 
-if ($row) 
+if ($row['active']==1) 
 {
 	
 	$email_new = explode ( "@", $email );
 	$username = $email_new [0];
 	$_SESSION ["username"] = $username;
 	$_SESSION ["id"] = $row ["id"];
+	$_SESSION ["encrypted_id"] = $row ["encrypted_id"];
 	$_SESSION ["usertype"] = $row['usertype'];
 	
 	
@@ -30,17 +31,23 @@ if ($row)
 	{
 		if (! $hash) 
 		{
-			$_SESSION ['message'] = "Wrong Email or Password";
+			$_SESSION ['message'] = "Wrong Password is not correct.";
 			header ( "location:../index.html" );
 		}
 	}
 	
 	
-} 
+}
+if($row['active']==0)
 
-else 
 {
 	$_SESSION ['message'] = "You are not a active user. Sign Up!!";
+	header ( "location:../index.html" );
+}
+if(!$row)
+
+{
+	$_SESSION ['message'] = "Email id is not correct.";
 	header ( "location:../index.html" );
 }
 ?>

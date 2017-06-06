@@ -7,18 +7,18 @@ $error3 = null;
 $error4 = null;
 $error5 = null;
 
-if (isset ( $_GET ['id'] )) {
-	$id = $_GET ['id'];
-	$users = mysqli_query ( $connection, "select * FROM `users` WHERE id='" . $id . "'" );
+if (isset ( $_GET ['user'] )) {
+	$encrypted_id = $_GET ['user'];
+	$users = mysqli_query ( $connection, "select * FROM `users` WHERE encrypted_id='" . $encrypted_id . "'" );
 	$row = mysqli_fetch_array ( $users );
 	$states = mysqli_query ( $connection, "select * from states order by sname" );
 	$user_state = mysqli_query ( $connection, "select * from states where sname='" . $row ["state"] . "'" );
 	$state = mysqli_fetch_array ( $user_state );
 	$districts = mysqli_query ( $connection, "select * from district where state_id = '" . $state ['id'] . "'" );
-	$usersubject_names = mysqli_query ( $connection, "select subject_name from user_subjects where user_id = '" . $id . "'" );
+	$usersubject_names = mysqli_query ( $connection, "select subject_name from user_subjects where user_id = '" . $row['id'] . "'" );
 	$subjects = mysqli_query ( $connection, "select * from subjects" );
 	$class = mysqli_query ( $connection, "select * from class" );
-	$pics = mysqli_query ( $connection, "SELECT * FROM profile_pic where user_id='" . $id . "'" );
+	$pics = mysqli_query ( $connection, "SELECT * FROM profile_pic where user_id='" . $row['id'] . "'" );
 	
 	$res = array ();
 	while ( $sub = mysqli_fetch_array ( $usersubject_names ) ) {
@@ -44,7 +44,8 @@ if (isset ( $_POST ['update'] )) {
 	$university = $_POST ['university'];
 	$subject = $_POST ['sub'];
 	$class = $_POST ['class'];
-	$id = $_POST ['id'];
+	$encrypted_id = $_SESSION['encrypted_id'];
+	$id=$_POST['id'];
 	$years = $_POST ['years'];
 	$months = $_POST ['months'];
 	$experience = $years . '-' . $months;
@@ -76,7 +77,7 @@ if (isset ( $_POST ['update'] )) {
 	if ($rows > 0) {
 		echo "Email/mobile already exist..";
 		$_SESSION ["message"] = "Can't Update Email/mobile already exist..";
-		header ( "Location: ../views/update_profile.html?id=" . $id );
+		header ( "Location: ../views/profile.html?user=" . $encryped_id );
 	} else {
 		
 		$user_update = mysqli_query ( $connection, "UPDATE users SET  name ='" . $name . "', email ='" . $email . "', 
@@ -151,14 +152,14 @@ if (isset ( $_POST ['update'] )) {
 			}
 		} else {
 			$_SESSION ['message'] = "Profile image can't uploaded.Check files";
-			 header("location:../views/update_profile.html?id=".$id);
+			 header("location:../views/profile.html?user=".$encrypted_id);
 		}
 	}
 	
 	if ($error1 || $error2 || $error3 || $error4 || $error5) {
 		
 		$_SESSION ['error'] = $error1 . $error2 . $error3 . $error4 . $error5;
-		 header("location:../views/update_profile.html?id=".$id);
+		 header("location:../views/profile.html?user=".$encrypted_id);
 	} 
 
 	else {
@@ -166,9 +167,10 @@ if (isset ( $_POST ['update'] )) {
 		$email_new = explode ( "@", $email );
 		$username = $email_new [0];
 		$_SESSION ["username"] = $username;
-		$_SESSION ["message"] = "RECORD UPDATED SUCCSESSFULLY";
+		//echo $_SESSION['encrypted_id'];
+		echo $_SESSION ["message"] = "RECORD UPDATED SUCCSESSFULLY";
 		mysqli_commit ( $connection );
-	 header ( "Location: ../views/update_profile.html?id=".$id );
+      header ( "Location: ../views/profile.html?user=".$encrypted_id );
 	}
 }
 

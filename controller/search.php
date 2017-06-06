@@ -14,13 +14,13 @@ if (isset ( $_GET ['search-key'] )) {
 	
 	// search teacher and student details......//
 	if ($row ['usertype'] == 'student') {
-		$search_users = mysqli_query ( $connection, "select users.id,users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
+		$search_users = mysqli_query ( $connection, "select users.id,users.encrypted_id,users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
                                                       from users inner join user_subjects on users.id=user_subjects.user_id
                                                      where users.usertype='teacher' and
 (user_subjects.subject_name like '%" . $key . "%' or users.locality like '%" . $key . "%' or 
 				users.city like '%" . $key . "%' or users.class like '%" . $key . "%') " );
 	} else {
-		$search_users = mysqli_query ( $connection, "select users.id,users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
+		$search_users = mysqli_query ( $connection, "select users.id,users.encrypted_id,users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
                                                       from users inner join user_subjects on users.id=user_subjects.user_id
                                                      where users.usertype='student' and
 (user_subjects.subject_name like '%" . $key . "%' or users.locality like '%" . $key . "%' 
@@ -47,13 +47,13 @@ if (isset ( $_GET ['search-key'] )) {
 		//echo $start_from;
 		
 		if ($row ['usertype'] == 'student') {
-			$search_users_perpage = mysqli_query ( $connection, "select users.id,users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
+			$search_users_perpage = mysqli_query ( $connection, "select users.id,users.encrypted_id,users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
                                                       from users inner join user_subjects on users.id=user_subjects.user_id
                                                      where users.usertype='teacher' and
 (user_subjects.subject_name like '%" . $key . "%' or users.locality like '%" . $key . "%' or
 				users.city like '%" . $key . "%' or users.class like '%" . $key . "%')  LIMIT $start_from, $num_rec_per_page" );
 		} else {
-			$search_users_perpage = mysqli_query ( $connection, "select users.id, users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
+			$search_users_perpage = mysqli_query ( $connection, "select users.id,users.encrypted_id, users.name,users.locality,users.city,users.pincode,users.class,user_subjects.subject_name
                                                       from users inner join user_subjects on users.id=user_subjects.user_id
                                                      where users.usertype='student' and
 (user_subjects.subject_name like '%" . $key . "%' or users.locality like '%" . $key . "%'

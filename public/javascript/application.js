@@ -78,11 +78,13 @@ $(document).ready(function(){
 	        
 	       
 	       
-                $(".ratingRadio").click(function () {
+      /***          $(".ratingRadio").click(function () {
                 	           
-                    $.post('../controller/rating.php',{rate:$(this).val()},function(d){
-                    	
-                    	console.log("hiii");
+                	var id=document.getElementById("id").value;
+                	//console.log(id);
+                    $.post('../controller/rating.php',{rate:$(this).val(),id:id},function(d){
+                    
+                    
                         if(d>0)
                         {
                             console.log("hii");
@@ -91,15 +93,32 @@ $(document).ready(function(){
                         }
                     });
                     $(this).attr("checked");
-                });
+                }); ***/
            
+	   
+	        
+	        $("#send").click(function () {
+	        	var msg=$("#comments").val();
+	        	var id=$("#eid").val();
+               $.ajax({
+            	   type:"POST",
+            	   url:"../controller/sendmail.php",
+            	   data:'message='+msg+'&id='+id,
+            	   dataType:'json',
+            	   success: function(data){
+            		  
+            		   $('#contactModal').modal('toggle');
+            		  
+            	   }
+            	   
+               });
+               
+            });
+	        
 	        
 	       
 	        
-	});
-
-
-
+	}); 
 
 
 function getdistrict(val){
