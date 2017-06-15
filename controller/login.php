@@ -31,7 +31,7 @@ if ($row['active']==1)
 	{
 		if (! $hash) 
 		{
-			$_SESSION ['message'] = "Wrong Password is not correct.";
+			$_SESSION ['message'] = "Password is not correct.";
 			header ( "location:../index.html" );
 		}
 	}

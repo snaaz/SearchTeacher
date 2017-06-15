@@ -172,15 +172,13 @@ while($state=mysqli_fetch_array($states)){ ?>
 	
 </div>
   </div>
-</div>
-
-					
-
-
-
-						
-
-						<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
+  
+  <div class = "panel panel-danger">
+   <div class = "panel-heading">
+      <h3 class = "panel-title">Qualificational Details</h3>
+   </div>
+   <div class = "panel-body">
+   <?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 						<div class="form-group">
 							<label class="col-sm-3" for="qualification">Qualification</label>
 							<div class="col-sm-3">
@@ -227,8 +225,7 @@ while($state=mysqli_fetch_array($states)){ ?>
 									value="<?php echo $row['university'];?>">
 							</div>
 						</div>
-
-
+						
 						<div class="form-group">
 							<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 							<label class="col-sm-3" for="subject">Subject To Teach:</label>
@@ -262,9 +259,7 @@ while($state=mysqli_fetch_array($states)){ ?>
 								<input type="hidden" id="sub" name="sub" value="">
 
 							</div>
-						</div>
-
-						<div class="form-group">
+						</div><div class="form-group">
 							<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 							<label class="col-sm-3" for="class">Class To Teach:</label>
 							<?php } else {?>
@@ -290,8 +285,8 @@ while($class1=mysqli_fetch_array($class)){ ?>
 
 							</div>
 						</div>
-
-						<?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
+	               
+	               <?php  if(isset ( $row['usertype'] ) and $row['usertype'] == 'teacher') { ?>
 						<div class="form-group">
 							<label class="col-sm-3" for="">Teaching Experience:</label>
 							<div class="col-sm-4">
@@ -336,6 +331,19 @@ while($class1=mysqli_fetch_array($class)){ ?>
 							</div>
 						</div>
 						<?php } ?>
+	
+	
+						
+   </div>
+   </div>
+  
+</div>
+
+  
+						
+
+			<div class="col-sm-3">
+						
 						<div class="form-group">
 
 							<?php 
@@ -344,15 +352,15 @@ while($class1=mysqli_fetch_array($class)){ ?>
   ?>
 
 							<image src="../public/photos/<?php echo $pic['profile_pic']?>"
-								width="100" height="100" class="img-circle"></image>
+								width="100" height="100"></image>
 							<?php } ?>
 
-							<label class="col-sm-3" for="img">Profile Image:</label> <input
+							 <input
 								type="file" id="filename" name="file" accept="image/*"
 								onchange="Checkfiles();">
 
 						</div>
-
+</div>
 
                         <input type="hidden" name="id" value="<?php echo $row['id'];?>">
 
